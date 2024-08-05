@@ -3,7 +3,7 @@
   <img src="{{ cartItem.image }}" alt="" />
   <div class="content">
     <p>name :{{ cartItem.name }}</p>
-    <p>Quantity : {{ cartItem.quantity }}</p>
+    <p>Quantity : {{ cartItem.qty }}</p>
     <p>price : {{ cartItem.price }}</p>
     <p>total : {{ total }}</p>
     <button (click)="removeFromCart(cartItem.id)" mat-button>
