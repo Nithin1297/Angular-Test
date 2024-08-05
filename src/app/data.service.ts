@@ -16,6 +16,7 @@ export type Iproduct = {
 })
 export class DataService {
   q!: number;
+  id!: string;
   cart: Array<Iproduct> = [];
   addProductP(item: Iproduct) {
     if (this.cart.find((i) => item.id == i.id)) {
@@ -23,10 +24,10 @@ export class DataService {
       item.qty += 1;
       this.q = item.quantity;
       this.q -= item.qty;
+      this.id = item.id;
     } else {
       this.cart.push(item);
     }
-    this.updateProductQuantity(item.id, this.q);
   }
 
   updateProductQuantity(productId: string, quantity: number): Promise<any> {
@@ -78,6 +79,13 @@ export class DataService {
         throw new Error('Network response was not ok');
       }
       return response.json();
+    })
+    .then((order) => {
+      // Update product quantities after order is placed
+      orderDetails.items.forEach((item: Iproduct) => {
+        this.updateProductQuantity(item.id, item.quantity - item.qty);
+      });
+      return order;
     });
   }
 
