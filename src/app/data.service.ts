@@ -38,8 +38,30 @@ export class DataService {
 
   orders: Array<Iproduct> = [];
 
-  addOrder(orderDetails: any) {
+  addOrder(orderDetails: any): Promise<any> {
     this.orders.push(orderDetails);
+  return this.postOrderToApi(orderDetails);
+  }
+
+  postOrderToApi(orderDetails: any): Promise<any> {
+    return fetch('https://66b0a87f6a693a95b539a6fd.mockapi.io/Orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(orderDetails),
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    });
+  }
+
+  getOrdersP(): Promise<Iproduct[]> {
+    return fetch('https://66b0a87f6a693a95b539a6fd.mockapi.io/Orders').then(
+      (res) => res.json()
+    );
   }
 
   constructor() {}

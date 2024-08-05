@@ -10,7 +10,13 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatChipsModule, MatIconModule,CommonModule],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatIconModule,
+    CommonModule,
+  ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
@@ -30,7 +36,7 @@ export class CartComponent {
 
   calculateGrandTotal() {
     this.grandTotal = this.allItems.reduce((total, item) => {
-      return total + (parseFloat(item.price) * item.qty);
+      return total + parseFloat(item.price) * item.qty;
     }, 0);
   }
 
@@ -49,17 +55,21 @@ export class CartComponent {
   placeOrder() {
     const orderDetails = {
       items: this.allItems,
-      total: this.total(),
+      total: this.grandTotal,
       orderId: this.generateOrderId(),
       date: new Date().toLocaleString(),
     };
-
-    this.dataService.addOrder(orderDetails);
-    this.router.navigate(['/orders'], { state: { orderDetails } });
+  
+    this.dataService.addOrder(orderDetails).then((response) => {
+      console.log('Order placed successfully:', response);
+      this.router.navigate(['/orders'], { state: { orderDetails } });
+    }).catch((error) => {
+      console.error('Error placing order:', error);
+    });
   }
-
+  
+  id: number = 1;
   generateOrderId() {
-    // Generate a unique order ID
-    return Math.random().toString(36).substring(2, 10);
+    return (this.id += 1);
   }
 }
