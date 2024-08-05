@@ -19,7 +19,7 @@ export class DataService {
   addProductP(item: Iproduct) {
     if (this.cart.find((i) => item.id == i.id)) {
       const idx = this.cart.indexOf(item);
-      this.cart[idx].qty += 1;
+      item.qty += 1;
     } else {
       this.cart.push(item);
     }
