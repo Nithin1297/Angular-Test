@@ -15,15 +15,38 @@ export type Iproduct = {
   providedIn: 'root',
 })
 export class DataService {
+  q!: number;
   cart: Array<Iproduct> = [];
   addProductP(item: Iproduct) {
     if (this.cart.find((i) => item.id == i.id)) {
       const idx = this.cart.indexOf(item);
       item.qty += 1;
+      this.q = item.quantity;
+      this.q -= item.qty;
     } else {
       this.cart.push(item);
     }
+    this.updateProductQuantity(item.id, this.q);
   }
+
+  updateProductQuantity(productId: string, quantity: number): Promise<any> {
+    return fetch(
+      `https://66b0a87f6a693a95b539a6fd.mockapi.io/Products/${productId}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ quantity }), // Update the quantity in the API
+      }
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    });
+  }
+
   getDataP(): Promise<Iproduct[]> {
     return fetch('https://66b0a87f6a693a95b539a6fd.mockapi.io/Products').then(
       (res) => res.json()
