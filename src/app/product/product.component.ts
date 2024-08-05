@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
@@ -20,7 +20,11 @@ import { Iproduct } from '../data.service';
   styleUrl: './product.component.scss',
 })
 export class ProductComponent {
-  @Input() product : Iproduct = {
+  @Output() addItemEvent: EventEmitter<Iproduct> = new EventEmitter<Iproduct>();
+  addToCart() {
+    this.addItemEvent.emit(this.product);
+  }
+  @Input() product: Iproduct = {
     id: '1',
     name: 'Wireless Headphones',
     type: 'Electronics',

@@ -12,7 +12,7 @@
   />
   <mat-card-content class="content-container">
     <mat-card-footer class="example-card-footer">
-      <button routerLink="/overview/{{ product.id }}" mat-icon-button>
+      <button routerLink="/overview/{{ product.id }}" mat-button>
         <span class="material-symbols-outlined"> info</span>
       </button>
       <p>
@@ -24,6 +24,9 @@
       <p>
         Quantity : <strong>{{ product.quantity }}</strong>
       </p>
+      <button (click)="addToCart()" mat-button>
+        <span class="material-symbols-outlined"> cart</span>
+      </button>
     </mat-card-footer>
   </mat-card-content>
 </mat-card>

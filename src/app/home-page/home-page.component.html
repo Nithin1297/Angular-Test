@@ -4,7 +4,8 @@
       @if (isLoading) {
       <h1>Loading...</h1>
       } @for (product of allProducts; track product.id) {
-      <app-product [product]="product" [id]="product.id" />
+      <app-product [product]="product" [id]="product.id" 
+      (addItemEvent)="addOneProduct(product)"/>
       }
     </div>
   </div>

@@ -1,0 +1,11 @@
+@for(cartItem of allItems ; track $index){
+    <div class="container">
+        <img src="{{cartItem.image}}" alt="">
+        <div class="content">
+            <p>name :{{cartItem.name}}</p>
+            <p>Quantity : {{cartItem.quantity}}</p>
+            <p>price : {{cartItem.price}}</p>
+            <p>total : {{total}}</p>
+        </div>
+    </div>
+}
