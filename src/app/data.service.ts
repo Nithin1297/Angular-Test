@@ -6,7 +6,7 @@ export type Iproduct = {
   type: string;
   description: string;
   price: string;
-  quantity: string;
+  quantity: number;
   image: string;
   qty: number;
 };
@@ -40,7 +40,7 @@ export class DataService {
 
   addOrder(orderDetails: any): Promise<any> {
     this.orders.push(orderDetails);
-  return this.postOrderToApi(orderDetails);
+    return this.postOrderToApi(orderDetails);
   }
 
   postOrderToApi(orderDetails: any): Promise<any> {

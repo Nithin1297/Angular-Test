@@ -1,24 +1,27 @@
 <div class="order-details">
-    <h4>Orders</h4>
-    <div class="each-order" *ngFor="let order of orders">
-      <p>Order ID: {{ order.orderId }}</p>
-      <p>Order Date: {{ order.date }}</p>
-      <h3>Items</h3>
-      <div class="items">
-        <div class="single-item" *ngFor="let item of order.items">
-          <img
-            src="{{ item.image }}"
-            alt="{{ item.name }}"
-            width="200px"
-            height="200px"
-          />
-          <div>
-            <p>{{ item.name }} - Qty: {{ item.qty }}</p>
-            <p>Price: {{ item.price * item.qty | currency }}</p>
-          </div>
+  <h4>Orders</h4>
+  @for (order of orders; track $index) {
+  <div class="each-order">
+    <p>Order ID: {{ order.orderId }}</p>
+    <p>Order Date: {{ order.date }}</p>
+    <h3>Items</h3>
+    <div class="items">
+      @for (item of order.items; track $index) {
+      <div class="single-item">
+        <img
+          src="{{ item.image }}"
+          alt="{{ item.name }}"
+          width="200px"
+          height="200px"
+        />
+        <div>
+          <p>{{ item.name }} - Qty: {{ item.qty }}</p>
+          <p>Total: {{ item.price * item.qty | currency }}</p>
         </div>
       </div>
-      <p>Total: {{ order.total | currency }}</p>
+      }
     </div>
+    <p>Grand Total : {{ order.total | currency }}</p>
   </div>
-  
+  }
+</div>

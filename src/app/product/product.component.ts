@@ -33,7 +33,7 @@ export class ProductComponent {
     price: '99.99',
     image:
       'https://images.unsplash.com/photo-1517841905240-47298e0c3e8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHdpcmVsbGVzcyUyMGhlYWRwaG9uZXxlbnwwfHx8fDE2ODQwMjY3OTg&ixlib=rb-1.2.1&q=80&w=400',
-    quantity: '10',
+    quantity: 10,
     qty: 0,
     
   };
