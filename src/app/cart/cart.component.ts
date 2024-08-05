@@ -14,19 +14,18 @@ import { Router } from '@angular/router';
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
-  removeFromCart(itemId: string) {
-    return this.allItems.splice(+itemId, 1);
+  removeFromCart(item: Iproduct) {
+    const idx = this.allItems.indexOf(item);
+    return this.allItems.splice(idx, 1);
     this.loaditems();
   }
-  placeOrder() {
-    return;
-  }
+
   @Input() allItems: Array<Iproduct> = [];
   constructor(public dataService: DataService, private router: Router) {
     this.allItems = dataService.cart;
   }
-  total(){
-    return 
+  total() {
+     return
   }
 
   ngOnInit() {
@@ -35,5 +34,22 @@ export class CartComponent {
 
   loaditems() {
     this.router.navigate(['cart']);
+  }
+
+  placeOrder() {
+    const orderDetails = {
+      items: this.allItems,
+      total: this.total(),
+      orderId: this.generateOrderId(),
+      date: new Date().toLocaleString(),
+    };
+
+    this.dataService.addOrder(orderDetails);
+    this.router.navigate(['/orders'], { state: { orderDetails } });
+  }
+
+  generateOrderId() {
+    // Generate a unique order ID
+    return Math.random().toString(36).substring(2, 10);
   }
 }

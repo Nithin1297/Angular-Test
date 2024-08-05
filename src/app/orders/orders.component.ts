@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-orders',
@@ -8,5 +10,10 @@ import { Component } from '@angular/core';
   styleUrl: './orders.component.scss'
 })
 export class OrdersComponent {
+  orderDetails: any;
+
+  constructor(private dataService: DataService, private router: Router) {
+    this.orderDetails = this.router.getCurrentNavigation()?.extras.state?.['orderDetails']
+  }
 
 }

@@ -36,5 +36,11 @@ export class DataService {
     ).then((res) => res.json());
   }
 
+  orders: Array<Iproduct> = [];
+
+  addOrder(orderDetails: any) {
+    this.orders.push(orderDetails);
+  }
+
   constructor() {}
 }
