@@ -1,11 +1,17 @@
 @for(cartItem of allItems ; track $index){
-    <div class="container">
-        <img src="{{cartItem.image}}" alt="">
-        <div class="content">
-            <p>name :{{cartItem.name}}</p>
-            <p>Quantity : {{cartItem.quantity}}</p>
-            <p>price : {{cartItem.price}}</p>
-            <p>total : {{total}}</p>
-        </div>
-    </div>
+<div class="container">
+  <img src="{{ cartItem.image }}" alt="" />
+  <div class="content">
+    <p>name :{{ cartItem.name }}</p>
+    <p>Quantity : {{ cartItem.quantity }}</p>
+    <p>price : {{ cartItem.price }}</p>
+    <p>total : {{ total }}</p>
+    <button (click)="removeFromCart(cartItem.id)" mat-button>
+        <span class="material-symbols-outlined">Remove From Cart</span>
+      </button>
+  </div>
+</div>
 }
+<button (click)="placeOrder()" mat-button>
+  <span class="material-symbols-outlined"> Place order</span>
+</button>
