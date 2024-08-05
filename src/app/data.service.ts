@@ -7,6 +7,7 @@ export type Iproduct = {
   description: string;
   price: string;
   quantity: string;
+  image : string
 };
 
 @Injectable({
@@ -14,7 +15,9 @@ export type Iproduct = {
 })
 export class DataService {
   getDataP(): Promise<Iproduct[]> {
-    throw new Error('Method not implemented.');
+    return fetch('https://66b0a87f6a693a95b539a6fd.mockapi.io/Products').then(
+      (res) => res.json()
+    );
   }
 
   constructor() {}

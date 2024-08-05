@@ -3,7 +3,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 
 export const routes: Routes = [
   {
-    path: ' ',
+    path: '',
     component: HomePageComponent,
   },
 ];

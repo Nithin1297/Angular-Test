@@ -3,17 +3,17 @@ import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DataService, Iproduct } from '../data.service';
+import { ProductComponent } from "../product/product.component";
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, ProductComponent],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
-  allBooks: Array<Iproduct> = [];
-  filteredBooks: Array<Iproduct> = [];
+  allProducts: Array<Iproduct> = [];
   isLoading: boolean = true;
   msg = '';
   constructor(public dataService : DataService){}
@@ -27,9 +27,7 @@ export class HomePageComponent {
       .getDataP()
       .then((data) => {
         // console.log(data);
-        this.allBooks = data;
-        this.filteredBooks = data;
-        console.log(this.filteredBooks);
+        this.allProducts = data;
         this.isLoading = false;
       })
       .catch(() => {

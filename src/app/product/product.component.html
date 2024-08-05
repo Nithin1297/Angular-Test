@@ -1,1 +1,26 @@
-<p>product works!</p>
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ product.name }}</mat-card-title>
+    <mat-card-subtitle>🖊️ {{ product.name }}</mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    src="{{ product.image }}"
+    alt="Photo of Author"
+    width="100%"
+    height="300px"
+  />
+  <mat-card-content class="content-container">
+    <mat-card-footer class="example-card-footer">
+      <p>
+        type : <strong>{{ product.type }}</strong>
+      </p>
+      <p>
+        price : <strong>{{ product.price }}</strong>
+      </p>
+      <p>
+        Quantity : <strong>{{ product.quantity }}</strong>
+      </p>
+    </mat-card-footer>
+  </mat-card-content>
+</mat-card>
