@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { Iproduct } from '../data.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product',
@@ -15,6 +16,7 @@ import { Iproduct } from '../data.service';
     MatChipsModule,
     MatIconModule,
     RouterLink,
+    CommonModule
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
