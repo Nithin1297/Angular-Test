@@ -17,6 +17,9 @@ export class HomePageComponent {
   isLoading: boolean = true;
   msg = '';
   constructor(public dataService : DataService){}
+  trackById(index: number, product: Iproduct): string {
+    return product.id;
+  }
   
   ngOnInit() {
     this.loadBooks();

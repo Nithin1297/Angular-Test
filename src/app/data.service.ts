@@ -20,5 +20,11 @@ export class DataService {
     );
   }
 
+  getProductByIdP(productId: string): Promise<Iproduct> {
+    return fetch(
+      `https://66b0a87f6a693a95b539a6fd.mockapi.io/Products/${productId}`
+    ).then((res) => res.json());
+  }
+
   constructor() {}
 }

@@ -12,6 +12,9 @@
   />
   <mat-card-content class="content-container">
     <mat-card-footer class="example-card-footer">
+      <button routerLink="/overview/{{ product.id }}" mat-icon-button>
+        <span class="material-symbols-outlined"> info</span>
+      </button>
       <p>
         type : <strong>{{ product.type }}</strong>
       </p>

@@ -1,0 +1,32 @@
+<div class="whole-container">
+    <mat-card class="example-card" appearance="outlined">
+      <mat-card-header>
+          <img
+            mat-card-image
+            src="{{ product.image }}"
+            alt="Photo of Author"
+            width="100%"
+            height="300px"
+          />
+        </mat-card-header>
+        <div class="side-container">
+            <div class="title-author">
+                <mat-card-title>Title : {{ product.name }}</mat-card-title>
+               
+            </div>
+              <mat-card-content class="content-container">
+            <mat-card-footer class="example-card-footer">
+              <p>
+               type :  <strong>{{ product.type }}</strong> 
+              </p>
+              <p>
+                price :  <strong>{{ product.price }}</strong>
+              </p>
+              <p>
+                description : {{ product.description }}
+              </p>
+            </mat-card-footer>
+              </mat-card-content>
+        </div>
+    </mat-card>
+</div>
