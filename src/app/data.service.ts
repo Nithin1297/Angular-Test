@@ -19,14 +19,25 @@ export class DataService {
   id!: string;
   cart: Array<Iproduct> = [];
   addProductP(item: Iproduct) {
-    if (this.cart.find((i) => item.id == i.id)) {
-      const idx = this.cart.indexOf(item);
-      item.qty += 1;
-      this.q = item.quantity;
-      this.q -= item.qty;
-      this.id = item.id;
+    // Check if the available quantity is greater than 0
+    if (item.quantity <= 0) {
+      console.error(`Cannot add ${item.name} to cart. Out of stock.`);
+      return;
+    }
+
+    const existingItem = this.cart.find((i) => item.id === i.id);
+    if (existingItem) {
+      if (existingItem.qty < item.quantity) {
+        existingItem.qty += 1;
+        this.updateProductQuantity(item.id, --item.quantity);
+      } else {
+        console.error(
+          `Cannot add more of ${item.name} to cart. Maximum quantity reached.`
+        );
+      }
     } else {
-      this.cart.push(item);
+      this.cart.push({ ...item, qty: 1 });
+      this.updateProductQuantity(item.id, item.quantity - 1);
     }
   }
 
@@ -38,7 +49,7 @@ export class DataService {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ quantity }), // Update the quantity in the API
+        body: JSON.stringify({ quantity }),
       }
     ).then((response) => {
       if (!response.ok) {
@@ -74,19 +85,19 @@ export class DataService {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(orderDetails),
-    }).then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
     })
-    .then((order) => {
-      // Update product quantities after order is placed
-      orderDetails.items.forEach((item: Iproduct) => {
-        this.updateProductQuantity(item.id, item.quantity - item.qty);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((order) => {
+        orderDetails.items.forEach((item: Iproduct) => {
+          this.updateProductQuantity(item.id, item.quantity - item.qty);
+        });
+        return order;
       });
-      return order;
-    });
   }
 
   getOrdersP(): Promise<Iproduct[]> {
