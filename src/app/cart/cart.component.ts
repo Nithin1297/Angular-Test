@@ -25,10 +25,9 @@ export class CartComponent {
   constructor(public dataService: DataService, private router: Router) {
     this.allItems = dataService.cart;
   }
-  total = 0;
-  // for(item of allItems){
-  //   this.total += item.price
-  // }
+  total(){
+    return 
+  }
 
   ngOnInit() {
     this.loaditems();
