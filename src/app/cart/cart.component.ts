@@ -52,6 +52,11 @@ export class CartComponent {
   }
 
   placeOrder() {
+    if (!this.validateOrder()) {
+      alert('One or more items exceed available stock. Please adjust your quantities.'); // Alert user
+      return; // Stop order placement
+    }
+
     const orderDetails = {
       items: this.allItems,
       total: this.grandTotal,
@@ -67,6 +72,16 @@ export class CartComponent {
     }).catch((error) => {
       console.error('Error placing order:', error);
     });
+  }
+
+  validateOrder(): boolean {
+    for (const item of this.allItems) {
+      if (item.qty > item.quantity) {
+        console.error(`Cannot place order. ${item.name} exceeds available stock.`);
+        return false; // Validation failed
+      }
+    }
+    return true; // Validation passed
   }
   
   id: number = 1;
