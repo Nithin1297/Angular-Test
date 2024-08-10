@@ -58,9 +58,11 @@ export class CartComponent {
       orderId: this.generateOrderId(),
       date: new Date().toLocaleString(),
     };
-  
+
     this.dataService.addOrder(orderDetails).then((response) => {
       console.log('Order placed successfully:', response);
+      this.dataService.cart = []; // Clear cart after placing order
+      this.calculateGrandTotal(); // Reset grand total
       this.router.navigate(['/orders'], { state: { orderDetails } });
     }).catch((error) => {
       console.error('Error placing order:', error);

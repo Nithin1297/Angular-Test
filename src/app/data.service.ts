@@ -28,17 +28,9 @@ export class DataService {
 
     const existingItem = this.cart.find((i) => item.id === i.id);
     if (existingItem) {
-      if (existingItem.qty < item.quantity) {
-        existingItem.qty += 1; // Increase quantity in cart
-        item.quantity -= 1; // Decrease available stock
-        this.updateProductQuantity(item.id, item.quantity);
-      } else {
-        console.error(`Cannot add more of ${item.name} to cart. Maximum quantity reached.`);
-      }
+      existingItem.qty += 1; // Increase quantity in cart
     } else {
       this.cart.push({ ...item, qty: 1 }); // Add new item to cart
-      item.quantity -= 1; // Decrease available stock
-      this.updateProductQuantity(item.id, item.quantity);
     }
   }
 
@@ -46,12 +38,9 @@ export class DataService {
     const cartItem = this.cart.find((i) => i.id === item.id);
     if (cartItem) {
       cartItem.qty -= 1; // Decrease quantity in cart
-      item.quantity += 1; // Increase available stock
-
       if (cartItem.qty === 0) {
         this.cart = this.cart.filter((i) => i.id !== item.id); // Remove item from cart if qty is 0
       }
-      this.updateProductQuantity(item.id, item.quantity);
     }
   }
 
@@ -85,7 +74,6 @@ export class DataService {
   orders: Array<Iproduct> = [];
 
   addOrder(orderDetails: any): Promise<any> {
-    this.orders.push(orderDetails);
     return this.postOrderToApi(orderDetails);
   }
 
@@ -104,6 +92,7 @@ export class DataService {
         return response.json();
       })
       .then((order) => {
+        // Update product quantities in the API after the order is placed
         orderDetails.items.forEach((item: Iproduct) => {
           this.updateProductQuantity(item.id, item.quantity - item.qty);
         });
