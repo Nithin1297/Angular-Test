@@ -23,9 +23,8 @@ import { CommonModule } from '@angular/common';
 export class CartComponent {
   grandTotal: number = 0;
   removeFromCart(item: Iproduct) {
-    const idx = this.allItems.indexOf(item);
-    return this.allItems.splice(idx, 1);
-    this.loaditems();
+    this.dataService.removeFromCart(item);
+    this.calculateGrandTotal(); // Recalculate grand total after removal
   }
 
   @Input() allItems: Array<Iproduct> = [];
@@ -72,4 +71,6 @@ export class CartComponent {
   generateOrderId() {
     return (this.id += 1);
   }
+
+ 
 }

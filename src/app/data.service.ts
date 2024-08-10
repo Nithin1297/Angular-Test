@@ -18,6 +18,7 @@ export class DataService {
   q!: number;
   id!: string;
   cart: Array<Iproduct> = [];
+
   addProductP(item: Iproduct) {
     // Check if the available quantity is greater than 0
     if (item.quantity <= 0) {
@@ -28,30 +29,40 @@ export class DataService {
     const existingItem = this.cart.find((i) => item.id === i.id);
     if (existingItem) {
       if (existingItem.qty < item.quantity) {
-        existingItem.qty += 1;
-        this.updateProductQuantity(item.id, --item.quantity);
+        existingItem.qty += 1; // Increase quantity in cart
+        item.quantity -= 1; // Decrease available stock
+        this.updateProductQuantity(item.id, item.quantity);
       } else {
-        console.error(
-          `Cannot add more of ${item.name} to cart. Maximum quantity reached.`
-        );
+        console.error(`Cannot add more of ${item.name} to cart. Maximum quantity reached.`);
       }
     } else {
-      this.cart.push({ ...item, qty: 1 });
-      this.updateProductQuantity(item.id, item.quantity - 1);
+      this.cart.push({ ...item, qty: 1 }); // Add new item to cart
+      item.quantity -= 1; // Decrease available stock
+      this.updateProductQuantity(item.id, item.quantity);
+    }
+  }
+
+  removeFromCart(item: Iproduct) {
+    const cartItem = this.cart.find((i) => i.id === item.id);
+    if (cartItem) {
+      cartItem.qty -= 1; // Decrease quantity in cart
+      item.quantity += 1; // Increase available stock
+
+      if (cartItem.qty === 0) {
+        this.cart = this.cart.filter((i) => i.id !== item.id); // Remove item from cart if qty is 0
+      }
+      this.updateProductQuantity(item.id, item.quantity);
     }
   }
 
   updateProductQuantity(productId: string, quantity: number): Promise<any> {
-    return fetch(
-      `https://66b0a87f6a693a95b539a6fd.mockapi.io/Products/${productId}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ quantity }),
-      }
-    ).then((response) => {
+    return fetch(`https://66b0a87f6a693a95b539a6fd.mockapi.io/Products/${productId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ quantity }),
+    }).then((response) => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
