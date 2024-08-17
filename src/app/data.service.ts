@@ -113,10 +113,12 @@ export class DataService {
   }
 
   async getOrdersP(): Promise<Iproduct[]> {
-    return await fetch(`${this.API}/orders`,{headers: {
-      'Content-Type': 'application/json',
-      // 'token': ''
-    }},).then((res) => res.json());
+    return await fetch(`${this.API}/orders/1`, {
+      headers: {
+        'Content-Type': 'application/json',
+        // 'token': ''
+      },
+    }).then((res) => res.json());
   }
 
   async login(credentials: User): Promise<TokenResponse> {

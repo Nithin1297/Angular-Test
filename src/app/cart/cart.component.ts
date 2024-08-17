@@ -61,8 +61,8 @@ export class CartComponent {
 
     const orderDetails = {
       // userId should be passed ⭐
-      items: this.allItems,
-      total: this.grandTotal,
+      products: this.allItems,
+      totalPrice: this.grandTotal,
       // orderId: this.generateOrderId(),
       // date: new Date().toLocaleString(),
     };

@@ -20,7 +20,7 @@ export class OrdersComponent {
 
   getOrders() {
     this.dataService.getOrdersP().then((orders) => {
-      this.orders = orders.reverse();
+      this.orders = orders;
     });
   }
 }

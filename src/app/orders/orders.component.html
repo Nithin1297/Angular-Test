@@ -3,7 +3,7 @@
   @for (order of orders; track $index) {
   <div class="each-order">
     <p>Order ID: {{ order.orderId }}</p>
-    <p>Order Date: {{ order.date }}</p>
+    <p>Order Date: {{ order.orderDate }}</p>
     <h3>Items</h3>
     <div class="items">
       @for (item of order.items; track $index) {
@@ -15,13 +15,13 @@
           height="200px"
         />
         <div>
-          <p>{{ item.name }} - Qty: {{ item.qty }}</p>
-          <p>Total: {{ item.price * item.qty | currency }}</p>
+          <p>{{ item.name }}</p>
+          <!-- <p>Total: {{ item.price * item.qty | currency }}</p> -->
         </div>
       </div>
       }
     </div>
-    <p>Grand Total : {{ order.total | currency }}</p>
+    <p>Grand Total : {{ order.totalPrice | currency }}</p>
   </div>
   }
 </div>
