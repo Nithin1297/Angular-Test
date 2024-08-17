@@ -3,8 +3,8 @@
     <div class="List-of-book">
       @if (isLoading) {
       <h1>Loading...</h1>
-      } @for (product of allProducts; track product.id) {
-      <app-product [product]="product" [id]="product.id" 
+      } @for (product of allProducts; track product.productId) {
+      <app-product [product]="product" [id]="product.productId" 
       (addItemEvent)="addOneProduct(product)"/>
       }
     </div>

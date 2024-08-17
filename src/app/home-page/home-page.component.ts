@@ -26,7 +26,7 @@ export class HomePageComponent {
   msg = '';
   constructor(public dataService: DataService) {}
   trackById(index: number, product: Iproduct): string {
-    return product.id;
+    return product.productId;
   }
 
   ngOnInit() {

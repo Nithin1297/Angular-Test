@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
 export type Iproduct = {
-  id: string;
+  productId: string;
   name: string;
-  type: string;
   description: string;
   price: string;
+  type: string;
   quantity: number;
   image: string;
   qty: number;
@@ -15,6 +15,7 @@ export type Iproduct = {
   providedIn: 'root',
 })
 export class DataService {
+  API: string = 'https://node-test-la0a.onrender.com';
   q!: number;
   id!: string;
   cart: Array<Iproduct> = [];
@@ -26,7 +27,7 @@ export class DataService {
       return;
     }
 
-    const existingItem = this.cart.find((i) => item.id === i.id);
+    const existingItem = this.cart.find((i) => item.productId === i.productId);
     if (existingItem) {
       existingItem.qty += 1; // Increase quantity in cart
     } else {
@@ -35,23 +36,26 @@ export class DataService {
   }
 
   removeFromCart(item: Iproduct) {
-    const cartItem = this.cart.find((i) => i.id === item.id);
+    const cartItem = this.cart.find((i) => i.productId === item.productId);
     if (cartItem) {
       cartItem.qty -= 1; // Decrease quantity in cart
       if (cartItem.qty === 0) {
-        this.cart = this.cart.filter((i) => i.id !== item.id); // Remove item from cart if qty is 0
+        this.cart = this.cart.filter((i) => i.productId !== item.productId); // Remove item from cart if qty is 0
       }
     }
   }
 
-  updateProductQuantity(productId: string, quantity: number): Promise<any> {
-    return fetch(`https://66b0a87f6a693a95b539a6fd.mockapi.io/Products/${productId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ quantity }),
-    }).then((response) => {
+  async updateProductQuantity(productId: string, quantity: number): Promise<any> {
+    return await fetch(
+      `${this.API}/products/${productId}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ quantity }),
+      }
+    ).then((response) => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -59,15 +63,13 @@ export class DataService {
     });
   }
 
-  getDataP(): Promise<Iproduct[]> {
-    return fetch('https://66b0a87f6a693a95b539a6fd.mockapi.io/Products').then(
-      (res) => res.json()
-    );
+ async getDataP(): Promise<Iproduct[]> {
+    return await fetch(`${this.API}/products`).then((res) => res.json());
   }
 
-  getProductByIdP(productId: string): Promise<Iproduct> {
-    return fetch(
-      `https://66b0a87f6a693a95b539a6fd.mockapi.io/Products/${productId}`
+ async getProductByIdP(productId: string): Promise<Iproduct> {
+    return await fetch(
+      `${this.API}/products/${productId}`
     ).then((res) => res.json());
   }
 
@@ -77,8 +79,8 @@ export class DataService {
     return this.postOrderToApi(orderDetails);
   }
 
-  postOrderToApi(orderDetails: any): Promise<any> {
-    return fetch('https://66b0a87f6a693a95b539a6fd.mockapi.io/Orders', {
+  async postOrderToApi(orderDetails: any): Promise<any> {
+    return await fetch('${this.API}/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -94,14 +96,14 @@ export class DataService {
       .then((order) => {
         // Update product quantities in the API after the order is placed
         orderDetails.items.forEach((item: Iproduct) => {
-          this.updateProductQuantity(item.id, item.quantity - item.qty);
+          this.updateProductQuantity(item.productId, item.quantity - item.qty);
         });
         return order;
       });
   }
 
-  getOrdersP(): Promise<Iproduct[]> {
-    return fetch('https://66b0a87f6a693a95b539a6fd.mockapi.io/Orders').then(
+  async getOrdersP(): Promise<Iproduct[]> {
+    return await fetch('${this.API}/orders').then(
       (res) => res.json()
     );
   }
