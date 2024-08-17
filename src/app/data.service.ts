@@ -11,18 +11,27 @@ export type Iproduct = {
   qty: number;
 };
 
+export interface User {
+  username: string;
+  password: string;
+}
+
+export interface TokenResponse {
+  msg: string;
+  token: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
   // API: string = 'https://node-test-la0a.onrender.com';
-  API: string = `http://localhost:4000`
+  API: string = `http://localhost:4000`;
   q!: number;
   id!: string;
   cart: Array<Iproduct> = [];
 
   addProductP(item: Iproduct) {
-    // Check if the available quantity is greater than 0
     if (item.quantity <= 0) {
       console.error(`Cannot add ${item.name} to cart. Out of stock.`);
       return;
@@ -104,7 +113,20 @@ export class DataService {
   }
 
   async getOrdersP(): Promise<Iproduct[]> {
-    return await fetch(`${this.API}/orders`).then((res) => res.json());
+    return await fetch(`${this.API}/orders`,{headers: {
+      'Content-Type': 'application/json',
+      // 'token': ''
+    }},).then((res) => res.json());
+  }
+
+  async login(credentials: User): Promise<TokenResponse> {
+    return await fetch(`${this.API}/users/login`, {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    }).then((res) => res.json());
   }
 
   constructor() {}
