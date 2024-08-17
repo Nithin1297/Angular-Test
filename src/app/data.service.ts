@@ -112,13 +112,8 @@ export class DataService {
       });
   }
 
-  async getOrdersP(): Promise<Iproduct[]> {
-    return await fetch(`${this.API}/orders/1`, {
-      headers: {
-        'Content-Type': 'application/json',
-        // 'token': ''
-      },
-    }).then((res) => res.json());
+  async getOrdersP(): Promise<any> {
+    return await fetch(`${this.API}/orders/9861fc18-6fc5-4fe4-b324-50ea96bd8d29getting oeder `).then((res) => res.json());
   }
 
   async login(credentials: User): Promise<TokenResponse> {

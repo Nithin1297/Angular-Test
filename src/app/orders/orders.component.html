@@ -1,12 +1,12 @@
 <div class="order-details">
   <h4>Orders</h4>
-  @for (order of orders; track $index) {
+  <!-- @for (order of orders; track $index) { -->
   <div class="each-order">
-    <p>Order ID: {{ order.orderId }}</p>
-    <p>Order Date: {{ order.orderDate }}</p>
+    <p>Order ID: {{ orders.orderId }}</p>
+    <p>Order Date: {{ orders.orderDate }}</p>
     <h3>Items</h3>
     <div class="items">
-      @for (item of order.items; track $index) {
+      @for (item of orders.products; track $index) {
       <div class="single-item">
         <img
           src="{{ item.image }}"
@@ -21,7 +21,7 @@
       </div>
       }
     </div>
-    <p>Grand Total : {{ order.totalPrice | currency }}</p>
+    <p>Grand Total : {{ orders.totalPrice | currency }}</p>
   </div>
-  }
+  <!-- } -->
 </div>

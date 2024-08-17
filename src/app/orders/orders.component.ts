@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './orders.component.scss',
 })
 export class OrdersComponent {
-  orders: any[] = [];
+  orders: any;
 
   constructor(private dataService: DataService, private router: Router) {}
   ngOnInit() {
@@ -19,8 +19,8 @@ export class OrdersComponent {
   }
 
   getOrders() {
-    this.dataService.getOrdersP().then((orders) => {
-      this.orders = orders;
+    this.dataService.getOrdersP().then((data) => {
+      this.orders = data.orders;
     });
   }
 }
