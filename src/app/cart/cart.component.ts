@@ -53,41 +53,48 @@ export class CartComponent {
 
   placeOrder() {
     if (!this.validateOrder()) {
-      alert('One or more items exceed available stock. Please adjust your quantities.'); // Alert user
+      alert(
+        'One or more items exceed available stock. Please adjust your quantities.'
+      ); // Alert user
       return; // Stop order placement
     }
 
     const orderDetails = {
+      // userId should be passed ⭐
       items: this.allItems,
       total: this.grandTotal,
-      orderId: this.generateOrderId(),
-      date: new Date().toLocaleString(),
+      // orderId: this.generateOrderId(),
+      // date: new Date().toLocaleString(),
     };
+    console.log(orderDetails);
 
-    this.dataService.addOrder(orderDetails).then((response) => {
-      console.log('Order placed successfully:', response);
-      this.dataService.cart = []; // Clear cart after placing order
-      this.calculateGrandTotal(); // Reset grand total
-      this.router.navigate(['/orders'], { state: { orderDetails } });
-    }).catch((error) => {
-      console.error('Error placing order:', error);
-    });
+    this.dataService
+      .addOrder(orderDetails)
+      .then((response) => {
+        console.log('Order placed successfully:', response);
+        this.dataService.cart = []; // Clear cart after placing order
+        this.calculateGrandTotal(); // Reset grand total
+        this.router.navigate(['/orders'], { state: { orderDetails } });
+      })
+      .catch((error) => {
+        console.error('Error placing order:', error);
+      });
   }
 
   validateOrder(): boolean {
     for (const item of this.allItems) {
       if (item.qty > item.quantity) {
-        console.error(`Cannot place order. ${item.name} exceeds available stock.`);
+        console.error(
+          `Cannot place order. ${item.name} exceeds available stock.`
+        );
         return false; // Validation failed
       }
     }
     return true; // Validation passed
   }
-  
+
   id: number = 1;
   generateOrderId() {
     return (this.id += 1);
   }
-
- 
 }

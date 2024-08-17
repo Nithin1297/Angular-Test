@@ -15,7 +15,8 @@ export type Iproduct = {
   providedIn: 'root',
 })
 export class DataService {
-  API: string = 'https://node-test-la0a.onrender.com';
+  // API: string = 'https://node-test-la0a.onrender.com';
+  API: string = `http://localhost:4000`
   q!: number;
   id!: string;
   cart: Array<Iproduct> = [];
@@ -45,17 +46,17 @@ export class DataService {
     }
   }
 
-  async updateProductQuantity(productId: string, quantity: number): Promise<any> {
-    return await fetch(
-      `${this.API}/products/${productId}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ quantity }),
-      }
-    ).then((response) => {
+  async updateProductQuantity(
+    productId: string,
+    quantity: number
+  ): Promise<any> {
+    return await fetch(`${this.API}/products/${productId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ quantity }),
+    }).then((response) => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -63,14 +64,14 @@ export class DataService {
     });
   }
 
- async getDataP(): Promise<Iproduct[]> {
+  async getDataP(): Promise<Iproduct[]> {
     return await fetch(`${this.API}/products`).then((res) => res.json());
   }
 
- async getProductByIdP(productId: string): Promise<Iproduct> {
-    return await fetch(
-      `${this.API}/products/${productId}`
-    ).then((res) => res.json());
+  async getProductByIdP(productId: string): Promise<Iproduct> {
+    return await fetch(`${this.API}/products/${productId}`).then((res) =>
+      res.json()
+    );
   }
 
   orders: Array<Iproduct> = [];
@@ -80,7 +81,7 @@ export class DataService {
   }
 
   async postOrderToApi(orderDetails: any): Promise<any> {
-    return await fetch('${this.API}/orders', {
+    return await fetch(`${this.API}/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -103,9 +104,7 @@ export class DataService {
   }
 
   async getOrdersP(): Promise<Iproduct[]> {
-    return await fetch('${this.API}/orders').then(
-      (res) => res.json()
-    );
+    return await fetch(`${this.API}/orders`).then((res) => res.json());
   }
 
   constructor() {}
