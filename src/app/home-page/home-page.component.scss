@@ -2,7 +2,7 @@
 .book-list-container {
     display: flex;
     // flex-direction: column;
-    margin: 50px 0px;
+    margin: 2rem 5rem;
     justify-content: space-evenly;
     // padding-left: 1rem;
   }
@@ -11,5 +11,5 @@
    .List-of-book{
     display: flex;
     flex-wrap: wrap;
-    gap: 3rem;
+    gap: 2rem;
    }

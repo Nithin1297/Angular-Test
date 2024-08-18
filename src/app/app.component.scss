@@ -1,0 +1,16 @@
+body{
+    margin: 2rem 2rem;
+}
+
+header > nav {
+display: flex;
+justify-content: center;
+gap: 2rem;
+}
+header{
+    padding: 2rem;
+}
+.example-button-row{
+    display: flex;
+    gap: 1rem;
+}

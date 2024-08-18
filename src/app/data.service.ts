@@ -39,16 +39,16 @@ export class DataService {
 
     const existingItem = this.cart.find((i) => item.productId === i.productId);
     if (existingItem) {
-      existingItem.qty += 1; // Increase quantity in cart
+      existingItem.qty += 1; 
     } else {
-      this.cart.push({ ...item, qty: 1 }); // Add new item to cart
+      this.cart.push({ ...item, qty: 1 }); 
     }
   }
 
   removeFromCart(item: Iproduct) {
     const cartItem = this.cart.find((i) => i.productId === item.productId);
     if (cartItem) {
-      cartItem.qty -= 1; // Decrease quantity in cart
+      cartItem.qty -= 1; 
       if (cartItem.qty === 0) {
         this.cart = this.cart.filter((i) => i.productId !== item.productId); // Remove item from cart if qty is 0
       }
@@ -89,6 +89,7 @@ export class DataService {
     return this.postOrderToApi(orderDetails);
   }
 
+  userIdOnOrder: string ="9861fc18-6fc5-4fe4-b324-50ea96bd8d29";
   async postOrderToApi(orderDetails: any): Promise<any> {
     return await fetch(`${this.API}/orders`, {
       method: 'POST',
@@ -103,8 +104,8 @@ export class DataService {
         }
         return response.json();
       })
+      // .then((data) => (this.userIdOnOrder = data.orders.userId))
       .then((order) => {
-        // Update product quantities in the API after the order is placed
         orderDetails.items.forEach((item: Iproduct) => {
           this.updateProductQuantity(item.productId, item.quantity - item.qty);
         });
@@ -113,11 +114,24 @@ export class DataService {
   }
 
   async getOrdersP(): Promise<any> {
-    return await fetch(`${this.API}/orders/9861fc18-6fc5-4fe4-b324-50ea96bd8d29getting oeder `).then((res) => res.json());
+    // this userId is coming as response to the cart comp
+    return await fetch(`${this.API}/orders/${this.userIdOnOrder}`).then((res) =>
+      res.json()
+    );
   }
 
   async login(credentials: User): Promise<TokenResponse> {
     return await fetch(`${this.API}/users/login`, {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    }).then((res) => res.json());
+  }
+
+  async signUp(credentials: User): Promise<TokenResponse> {
+    return await fetch(`${this.API}/users/signup`, {
       method: 'POST',
       body: JSON.stringify(credentials),
       headers: {
