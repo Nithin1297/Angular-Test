@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 export type Iproduct = {
   productId: string;
@@ -140,5 +141,9 @@ export class DataService {
     }).then((res) => res.json());
   }
 
-  constructor() {}
+  searchUser(searchTerm: string) {
+    return this.http.get<Iproduct[]>(`${this.API}/products?search=${searchTerm}`);
+  }
+
+  constructor(private http: HttpClient) {}
 }

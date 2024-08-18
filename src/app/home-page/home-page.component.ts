@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { DataService, Iproduct } from '../data.service';
 import { ProductComponent } from '../product/product.component';
 import { MatIconModule } from '@angular/material/icon';
+import { debounceTime, switchMap, catchError, of, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
@@ -42,7 +43,28 @@ export class HomePageComponent {
   }
 
   ngOnInit() {
-    this.loadProducts();
+    this.searchForm
+      .get('search')
+      ?.valueChanges.pipe(
+        startWith(''),
+        debounceTime(300),
+        switchMap((searchTerm) =>
+          this.dataService.searchUser(searchTerm).pipe(
+            catchError((error) => {
+              console.log(error);
+              return of([]);
+            })
+          )
+        )
+      )
+      .subscribe((data) => {
+        console.log(data);
+        this.isLoading = false;
+        this.allProducts = data;
+        this.isLoading = false;
+      });
+
+    // this.loadProducts();
   }
 
   loadProducts() {
