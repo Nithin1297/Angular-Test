@@ -1,24 +1,30 @@
+<div class="msg">
+    <h6>{{ msg }}</h6>
+</div>
 <form [formGroup]="signupForm" (ngSubmit)="signup()" class="add-movie-form">
-    <mat-form-field>
-      <mat-label>Username</mat-label>
-      <input matInput placeholder="username" formControlName="username" />
-  
-      @if(username?.touched && username?.hasError('required') ){
-      <mat-error>Username is <strong>required</strong></mat-error>
-      } @if(username?.touched && username?.hasError('minlength') ){
-      <mat-error>Please provide full username 😁</mat-error>
-      }
-    </mat-form-field>
-  
-    <mat-form-field>
-      <mat-label>Password</mat-label>
-      <input
-        type="text"
-        matInput
-        placeholder="1234abc"
-        formControlName="password"
-      />
-    </mat-form-field>
-  
-    <button mat-raised-button type="submit">Signup</button>
-  </form>
+  <mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput placeholder="username" formControlName="username" />
+
+    @if(username?.touched && username?.hasError('required') ){
+    <mat-error>Username is <strong>required</strong></mat-error>
+    } @if(username?.touched && username?.hasError('minlength') ){
+    <mat-error>Please provide full username 😁</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input
+      type="password"
+      matInput
+      placeholder="1234abc"
+      formControlName="password"
+    />
+    @if(password?.touched && password?.hasError('required') ){
+    <mat-error>Password is <strong>required</strong></mat-error>
+    }
+  </mat-form-field>
+
+  <button mat-raised-button type="submit">Signup</button>
+</form>

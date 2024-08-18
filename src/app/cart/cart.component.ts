@@ -35,7 +35,7 @@ export class CartComponent {
 
   calculateGrandTotal() {
     this.grandTotal = this.allItems.reduce((total, item) => {
-      return total + parseFloat(item.price) * item.qty;
+      return total + item.price * item.qty;
     }, 0);
   }
 

@@ -10,6 +10,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DataService } from '../data.service';
 
+import { Route, Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -24,10 +26,14 @@ import { DataService } from '../data.service';
 })
 export class LoginComponent {
   loginForm!: FormGroup;
-  constructor(private fb: FormBuilder, public dataService: DataService) {
+  constructor(
+    private fb: FormBuilder,
+    public dataService: DataService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
-      password: '',
+      password: ['', [Validators.required]],
     });
   }
 
@@ -35,10 +41,17 @@ export class LoginComponent {
     return this.loginForm.get('username');
   }
 
+  get password() {
+    return this.loginForm.get('password');
+  }
+
   login() {
     console.log(this.loginForm.value);
-    this.dataService.login(this.loginForm.value).then((data) => {
-      localStorage.setItem('token', data.token);
-    });
+    this.dataService
+      .login(this.loginForm.value)
+      .then((data) => {
+        localStorage.setItem('token', data.token);
+      })
+      .then(() => this.router.navigate(['/']));
   }
 }

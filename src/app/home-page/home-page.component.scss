@@ -13,3 +13,14 @@
     flex-wrap: wrap;
     gap: 2rem;
    }
+   .search{
+    display: flex;
+    justify-content: start;
+    padding: 0rem 2rem;
+   }
+.inp{
+  width: 15rem;
+  height: 5rem;
+  display: flex;
+  align-items:end;
+}

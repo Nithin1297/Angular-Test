@@ -1,0 +1,16 @@
+.add-movie-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  
+    max-width: 400px;
+    margin: 16px auto;
+  }
+  .msg{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 16px auto;
+  }

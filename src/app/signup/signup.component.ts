@@ -23,11 +23,12 @@ import { DataService } from '../data.service';
   styleUrl: './signup.component.scss',
 })
 export class SignupComponent {
+  msg: string = '';
   signupForm!: FormGroup;
   constructor(private fb: FormBuilder, public dataService: DataService) {
     this.signupForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
-      password: '',
+      password: ['', [Validators.required]],
     });
   }
 
@@ -35,8 +36,14 @@ export class SignupComponent {
     return this.signupForm.get('username');
   }
 
+  get password() {
+    return this.signupForm.get('password');
+  }
+
   signup() {
     console.log(this.signupForm.value);
-    this.dataService.signUp(this.signupForm.value);
+    this.dataService
+      .signUp(this.signupForm.value)
+      .then(() => (this.msg = 'SignUp Successful 🥳, Please Login'));
   }
 }
