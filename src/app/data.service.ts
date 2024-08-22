@@ -9,7 +9,7 @@ export type Iproduct = {
   type: string;
   quantity: number;
   image: string;
-  qty: number;
+  // quantity: number;
 };
 
 export interface User {
@@ -34,8 +34,8 @@ export class DataService {
   id!: string;
   cart: Array<Iproduct> = [];
 
-  deleteProduct(product: Iproduct) {
-    return fetch(`${this.API}/products/${product.productId}`, {
+  async deleteProduct(product: Iproduct) {
+    return await fetch(`${this.API}/products/${product.productId}`, {
       method: 'Delete',
     }).then((res) => res.json());
   }
@@ -48,9 +48,9 @@ export class DataService {
 
     const existingItem = this.cart.find((i) => item.productId === i.productId);
     if (existingItem) {
-      existingItem.qty += 1;
+      existingItem.quantity += 1;
     } else {
-      this.cart.push({ ...item, qty: 1 });
+      this.cart.push({ ...item, quantity: 1 });
       fetch(`${this.API}/cart`, {
         method: 'POST',
         headers: {
@@ -58,22 +58,21 @@ export class DataService {
           'x-auth-token': localStorage.getItem('token') as string,
         },
         body: JSON.stringify(this.cart),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      });
     }
   }
 
   removeFromCart(item: Iproduct) {
     const cartItem = this.cart.find((i) => i.productId === item.productId);
     if (cartItem) {
-      cartItem.qty -= 1;
-      if (cartItem.qty === 0) {
-        this.cart = this.cart.filter((i) => i.productId !== item.productId); // Remove item from cart if qty is 0
+      cartItem.quantity -= 1;
+      if (cartItem.quantity === 0) {
+        this.cart = this.cart.filter((i) => i.productId !== item.productId); // Remove item from cart if quantityis 0
       }
     }
   }
@@ -112,14 +111,14 @@ export class DataService {
     return this.postOrderToApi(orderDetails);
   }
 
-  userIdOnOrder: string = '9861fc18-6fc5-4fe4-b324-50ea96bd8d29';
   async postOrderToApi(orderDetails: any): Promise<any> {
-    return await fetch(`${this.API}/orders`, {
+    return await fetch(`${this.API}/orders/pay`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'x-auth-token': localStorage.getItem('token') as string,
       },
-      body: JSON.stringify(orderDetails),
+      // body: JSON.stringify(orderDetails),
     })
       .then((response) => {
         if (!response.ok) {
@@ -130,12 +129,13 @@ export class DataService {
       // .then((data) => (this.userIdOnOrder = data.orders.userId))
       .then((order) => {
         orderDetails.items.forEach((item: Iproduct) => {
-          // this.updateProductQuantity(item.productId, item.quantity - item.qty);
+          // this.updateProductQuantity(item.productId, item.quantity - item.quantity);
         });
         return order;
       });
   }
 
+  userIdOnOrder: string = '9861fc18-6fc5-4fe4-b324-50ea96bd8d29';
   async getOrdersP(): Promise<any> {
     // this userId is coming as response to the cart comp
     return await fetch(`${this.API}/orders/${this.userIdOnOrder}`).then((res) =>

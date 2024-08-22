@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink,Router } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { Iproduct } from '../data.service';
@@ -23,23 +23,23 @@ import { CommonModule } from '@angular/common';
   styleUrl: './product.component.scss',
 })
 export class ProductComponent {
-
   constructor(private router: Router) {
     this.isLoggedIn = this.checkToken();
-  }  
- 
-isLoggedIn: boolean;
- 
+  }
+
+  isLoggedIn: boolean;
+
   checkToken(): boolean {
     const token = localStorage.getItem('token');
     return !!token;
   }
-  
+
   @Output() addItemEvent: EventEmitter<Iproduct> = new EventEmitter<Iproduct>();
   addToCart() {
     this.addItemEvent.emit(this.product);
   }
-  @Output() deleteProductEvent: EventEmitter<Iproduct> = new EventEmitter<Iproduct>();
+  @Output() deleteProductEvent: EventEmitter<Iproduct> =
+    new EventEmitter<Iproduct>();
   @Input() product: Iproduct = {
     productId: '1',
     name: 'Wireless Headphones',
@@ -50,7 +50,6 @@ isLoggedIn: boolean;
     image:
       'https://images.unsplash.com/photo-1517841905240-47298e0c3e8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHdpcmVsbGVzcyUyMGhlYWRwaG9uZXxlbnwwfHx8fDE2ODQwMjY3OTg&ixlib=rb-1.2.1&q=80&w=400',
     quantity: 10,
-    qty: 0,
   };
   deleteProduct() {
     this.deleteProductEvent.emit(this.product);
@@ -60,7 +59,7 @@ isLoggedIn: boolean;
     // const username = localStorage.getItem('username');
     if (roleId) {
       // Parse the stored JSON
-      return roleId === '0' // Return true if roleId is '0'
+      return roleId === '0'; // Return true if roleId is '0'
     }
     return false; // Default to false if no authData
   }

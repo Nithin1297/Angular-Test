@@ -35,7 +35,7 @@ export class CartComponent {
 
   calculateGrandTotal() {
     this.grandTotal = this.allItems.reduce((total, item) => {
-      return total + item.price * item.qty;
+      return total + item.price * item.quantity;
     }, 0);
   }
 
@@ -83,7 +83,7 @@ export class CartComponent {
 
   validateOrder(): boolean {
     for (const item of this.allItems) {
-      if (item.qty > item.quantity) {
+      if (item.quantity > item.quantity) {
         console.error(
           `Cannot place order. ${item.name} exceeds available stock.`
         );
