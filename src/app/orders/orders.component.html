@@ -1,6 +1,9 @@
 @if (isLoggedIn) {
 
 <div class="order-details">
+  @if (orders.length == 0) {
+  <h1>Not placed any order yet</h1>
+  }@else {
   <h4>Orders</h4>
   <div *ngFor="let order of orders" class="each-order">
     <p>Order ID: {{ order.orderId }}</p>
@@ -24,8 +27,9 @@
     </div>
     <p>Grand Total: {{ order.totalPrice | currency }}</p>
   </div>
-</div>
-}
-@else {
-  <h1>Please Login 😊</h1>
   }
+</div>
+
+} @else {
+<h1>Please Login 😊</h1>
+}

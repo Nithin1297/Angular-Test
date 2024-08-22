@@ -10,10 +10,22 @@
   }
   
   .content-container{
+    display: flex;
+    // justify-content: center;
   }
   .buttons{
     
     display: flex;
     justify-content: space-evenly;
   }
-  
+  .material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+  }
+  .btns{
+    display: flex;
+    justify-content: end;
+  }

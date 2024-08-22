@@ -86,12 +86,13 @@ export class DataService {
           'x-auth-token': localStorage.getItem('token') as string,
         },
         body: JSON.stringify(this.cart),
-      }).then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      });
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
     }
   }
 
@@ -129,14 +130,12 @@ export class DataService {
         'x-auth-token': localStorage.getItem('token') as string,
       },
       // body: JSON.stringify(orderDetails),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-     
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    });
   }
 
   // userIdOnOrder: string = '9861fc18-6fc5-4fe4-b324-50ea96bd8d29';
@@ -146,9 +145,7 @@ export class DataService {
       headers: {
         'x-auth-token': localStorage.getItem('token') as string,
       },
-    }).then((res) =>
-      res.json()
-    );
+    }).then((res) => res.json());
   }
 
   async login(credentials: User): Promise<TokenResponse> {

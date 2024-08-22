@@ -1,4 +1,6 @@
-@if (isLoggedIn) {
+@if (isLoggedIn) { @if (allItems.length == 0) {
+<h1>Cart is empty</h1>
+}@else {
 
 <button (click)="placeOrder()" mat-button>
   <span class="material-symbols-outlined"> Place order</span>
@@ -20,6 +22,6 @@
     </div>
   </div>
 </div>
-} @else {
+} } @else {
 <h1>Please Login to add items to Cart.. 😊</h1>
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DataService } from '../data.service';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Route, Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -21,7 +21,6 @@ import { Route, Router, RouterLink } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     RouterLink,
-    
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -37,6 +36,12 @@ export class LoginComponent {
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required]],
     });
+  }
+
+  private _snackBar = inject(MatSnackBar);
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
   get username() {
@@ -56,6 +61,9 @@ export class LoginComponent {
         localStorage.setItem('username', data.username);
         localStorage.setItem('roleId', data.roleId);
       })
+      .then((data) =>
+        this.openSnackBar(`Hello ${this.loginForm.value.username} 👋`, 'Hi..')
+      )
       .then(() => this.router.navigate(['/']));
   }
 }

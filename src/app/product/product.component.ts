@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink, Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import { Iproduct } from '../data.service';
+import { DataService, Iproduct } from '../data.service';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 // import { Router } from 'express';
 
 @Component({
@@ -18,6 +20,8 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     RouterLink,
     CommonModule,
+    MatTooltipModule,
+    MatTooltipModule,
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
@@ -25,6 +29,11 @@ import { CommonModule } from '@angular/common';
 export class ProductComponent {
   constructor(private router: Router) {
     this.isLoggedIn = this.checkToken();
+  }
+  private _snackBar = inject(MatSnackBar);
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
   isLoggedIn: boolean;
@@ -38,8 +47,11 @@ export class ProductComponent {
 
   addToCart() {
     this.addItemEvent.emit(this.product);
+    this.isLoggedIn
+      ? this.openSnackBar('Item added to cart🥳', 'ok')
+      : this.openSnackBar('Please Login 🙂', 'ok');
   }
-  
+
   @Output() deleteProductEvent: EventEmitter<Iproduct> =
     new EventEmitter<Iproduct>();
   @Input() product: Iproduct = {
