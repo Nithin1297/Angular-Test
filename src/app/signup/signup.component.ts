@@ -42,8 +42,10 @@ export class SignupComponent {
 
   signup() {
     console.log(this.signupForm.value);
-    this.dataService
-      .signUp(this.signupForm.value)
-      .then(() => (this.msg = 'SignUp Successful 🥳, Please Login'));
+    if (this.signupForm.valid) {
+      this.dataService
+        .signUp(this.signupForm.value)
+        .then(() => (this.msg = 'SignUp Successful 🥳, Please Login'));
+    }
   }
 }
