@@ -4,7 +4,7 @@
 <div class="grand-total">
   <h3>Grand Total: {{ grandTotal | currency }}</h3>
 </div>
-<div class="whole-page">
+<!-- <div class="whole-page">
   @for(cartItem of allItems ; track $index){
   <div class="container">
     <img src="{{ cartItem.image }}" alt="" />
@@ -19,4 +19,18 @@
     </div>
   </div>
   }
+</div> -->
+<div class="whole-page">
+  <div *ngFor="let cartItem of allItems; let i = index" class="container">
+    <img [src]="cartItem.image" alt="{{ cartItem.name }}" />
+    <div class="content">
+      <h3>{{ cartItem.name }}</h3>
+      <p>Quantity: {{ cartItem.quantity }}</p>
+      <p>Price: {{ cartItem.price | currency }}</p>
+      <p>Total: {{ cartItem.quantity * cartItem.price | currency }}</p>
+      <button (click)="removeFromCart(cartItem)" mat-button>
+        <span class="material-symbols-outlined">Remove From Cart</span>
+      </button>
+    </div>
+  </div>
 </div>

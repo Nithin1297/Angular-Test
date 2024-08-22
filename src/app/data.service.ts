@@ -33,6 +33,34 @@ export class DataService {
   q!: number;
   id!: string;
   cart: Array<Iproduct> = [];
+  // len: number = this.cart.length
+  // async isCartEmpty() {
+  //   return await fetch(`${this.API}/cart`, {
+  //     headers: {
+  //       'x-auth-token': localStorage.getItem('token') as string,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       this.cart.push(data[0].products), console.log(data[0].products);
+  //     });
+  // }
+
+  async isCartEmpty() {
+    return await fetch(`${this.API}/cart`, {
+      headers: {
+        'x-auth-token': localStorage.getItem('token') as string,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        this.cart = data[0].products; // Update the cart directly
+        console.log(this.cart);
+      })
+      .catch((error) => {
+        console.error('Error fetching cart:', error);
+      });
+  }
 
   async deleteProduct(product: Iproduct) {
     return await fetch(`${this.API}/products/${product.productId}`, {

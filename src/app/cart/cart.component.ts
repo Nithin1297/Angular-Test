@@ -28,6 +28,7 @@ export class CartComponent {
   }
 
   @Input() allItems: Array<Iproduct> = [];
+
   constructor(public dataService: DataService, private router: Router) {
     this.allItems = dataService.cart;
     this.calculateGrandTotal();
@@ -44,7 +45,16 @@ export class CartComponent {
   }
 
   ngOnInit() {
-    this.loaditems();
+    // if (this.allItems.length == 0) {
+    //   this.dataService
+    //     .isCartEmpty()
+    //     .then(() => (this.allItems = this.dataService.cart));
+    // }
+    this.dataService.isCartEmpty().then(() => {
+      this.allItems = this.dataService.cart; // Assign fetched cart items
+      this.calculateGrandTotal(); // Recalculate grand total
+    });
+    // this.loaditems();
   }
 
   loaditems() {

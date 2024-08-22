@@ -35,9 +35,11 @@ export class ProductComponent {
   }
 
   @Output() addItemEvent: EventEmitter<Iproduct> = new EventEmitter<Iproduct>();
+
   addToCart() {
     this.addItemEvent.emit(this.product);
   }
+  
   @Output() deleteProductEvent: EventEmitter<Iproduct> =
     new EventEmitter<Iproduct>();
   @Input() product: Iproduct = {
