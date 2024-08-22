@@ -1,15 +1,11 @@
-
 .book-list-container {
     display: flex;
-    // flex-direction: column;
     margin: 2rem 5rem;
     justify-content: center;
     align-items: center;
     padding-left: 10rem;
     
-  }
-  
-  
+  }  
    .List-of-book{
     display: flex;
     flex-wrap: wrap;
@@ -19,7 +15,8 @@
    .search{
     display: flex;
     justify-content: end;
-    padding: 0rem 2rem;
+    padding: 0rem 11rem;
+    // margin: 0px 0px;
    }
 .inp{
   width: 15rem;
@@ -29,4 +26,7 @@
 }
 .example-form-field {
   width: 200px;
+}
+.load{
+  display: flex;justify-content: center;
 }

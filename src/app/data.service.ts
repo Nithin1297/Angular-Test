@@ -58,7 +58,7 @@ export class DataService {
         console.log(this.cart);
       })
       .catch((error) => {
-        console.error('Error fetching cart:', error);
+        // console.error('Error fetching cart:', );
       });
   }
 

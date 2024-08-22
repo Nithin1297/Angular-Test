@@ -4,22 +4,16 @@
     <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 </form>
-
-<!-- <mat-form-field class="example-form-field"  [formGroup]="searchForm">
-  <mat-label>Clearable input</mat-label>
-  <input matInput type="text" [(ngModel)]="search" formControlName="search">
-  @if (search) {
-    <button matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
-      <mat-icon>close</mat-icon>
-    </button>
+<div class="load">
+  @if (isLoading) {
+    <mat-spinner></mat-spinner>
   }
-</mat-form-field> -->
+</div>
 
 <div class="book-list-container">
+   
   <div class="List-of-book">
-    @if (isLoading) {
-    <h1>Loading...</h1>
-    } @for (product of allProducts; track product.productId) {
+   @for (product of allProducts; track product.productId) {
     <app-product
       [product]="product"
       [id]="product.productId"

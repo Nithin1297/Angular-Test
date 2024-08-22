@@ -13,6 +13,7 @@ import { ProductComponent } from '../product/product.component';
 import { MatIconModule } from '@angular/material/icon';
 import { debounceTime, switchMap, catchError, of, startWith } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-home-page',
@@ -22,7 +23,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    ProductComponent,FormsModule, MatButtonModule,
+    ProductComponent,FormsModule, MatButtonModule,MatProgressSpinnerModule
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',

@@ -4,11 +4,20 @@
     gap: 0.5rem;
   
     max-width: 400px;
-    margin: 16px auto;
+    margin: 4rem auto;
   }
   .login-message {
     margin-top: 20px; // Add some space above the message
     font-size: 14px; // Adjust font size
     text-align: right; // Align text to the right
     color: #333; // Set text color
+  }
+  .signUp{
+    display: flex;
+    justify-content: end;
+    margin-top: 0.8rem;
+  }
+  .lg_btn{
+    display: flex;
+    justify-content: center;
   }

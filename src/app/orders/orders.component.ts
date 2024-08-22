@@ -32,7 +32,7 @@ export class OrdersComponent {
       .getOrdersP()
       .then((data) => {
         this.orders = data; // Assign the entire response to orders
-        console.log(this.orders); // Debugging to ensure data is fetched correctly
+        // console.log(this.orders); // Debugging to ensure data is fetched correctly
       })
       .catch((error) => {
         console.error('Error fetching orders:', error);
