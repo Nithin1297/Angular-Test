@@ -1,27 +1,24 @@
 <div class="order-details">
   <h4>Orders</h4>
-  <!-- @for (order of orders; track $index) { -->
-  <div class="each-order">
-    <p>Order ID: {{ orders.orderId }}</p>
-    <p>Order Date: {{ orders.orderDate }}</p>
+  <div *ngFor="let order of orders" class="each-order">
+    <p>Order ID: {{ order.orderId }}</p>
+    <p>Order Date: {{ order.orderDate }}</p>
     <h3>Items</h3>
     <div class="items">
-      @for (item of orders.products; track $index) {
-      <div class="single-item">
-        <img
-          src="{{ item.image }}"
-          alt="{{ item.name }}"
+      <div *ngFor="let item of order.products" class="single-item">
+        <!-- <img
+          src="{{ item.productId }}"
+          alt="{{ item.productId }}"
           width="200px"
           height="200px"
-        />
+        /> -->
         <div>
-          <p>{{ item.name }}</p>
-          <!-- <p>Total: {{ item.price * item.quantity| currency }}</p> -->
+          <p>Product ID: {{ item.productId }}</p>
+          <p>Quantity: {{ item.quantity }}</p>
+          <!-- You can add more details if necessary -->
         </div>
       </div>
-      }
     </div>
-    <p>Grand Total : {{ orders.totalPrice | currency }}</p>
+    <p>Grand Total: {{ order.totalPrice | currency }}</p>
   </div>
-  <!-- } -->
 </div>

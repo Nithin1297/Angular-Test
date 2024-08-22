@@ -105,24 +105,6 @@ export class DataService {
     }
   }
 
-  // async updateProductQuantity(
-  //   productId: string,
-  //   quantity: number
-  // ): Promise<any> {
-  //   return await fetch(`${this.API}/products/${productId}`, {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ quantity }),
-  //   }).then((response) => {
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //     return response.json();
-  //   });
-  // }
-
   async getDataP(): Promise<Iproduct[]> {
     return await fetch(`${this.API}/products`).then((res) => res.json());
   }
@@ -154,19 +136,17 @@ export class DataService {
         }
         return response.json();
       })
-      // .then((data) => (this.userIdOnOrder = data.orders.userId))
-      .then((order) => {
-        orderDetails.items.forEach((item: Iproduct) => {
-          // this.updateProductQuantity(item.productId, item.quantity - item.quantity);
-        });
-        return order;
-      });
+     
   }
 
-  userIdOnOrder: string = '9861fc18-6fc5-4fe4-b324-50ea96bd8d29';
+  // userIdOnOrder: string = '9861fc18-6fc5-4fe4-b324-50ea96bd8d29';
   async getOrdersP(): Promise<any> {
     // this userId is coming as response to the cart comp
-    return await fetch(`${this.API}/orders/${this.userIdOnOrder}`).then((res) =>
+    return await fetch(`${this.API}/orders/`, {
+      headers: {
+        'x-auth-token': localStorage.getItem('token') as string,
+      },
+    }).then((res) =>
       res.json()
     );
   }

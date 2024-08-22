@@ -45,11 +45,6 @@ export class CartComponent {
   }
 
   ngOnInit() {
-    // if (this.allItems.length == 0) {
-    //   this.dataService
-    //     .isCartEmpty()
-    //     .then(() => (this.allItems = this.dataService.cart));
-    // }
     this.dataService.isCartEmpty().then(() => {
       this.allItems = this.dataService.cart; // Assign fetched cart items
       this.calculateGrandTotal(); // Recalculate grand total
@@ -70,11 +65,8 @@ export class CartComponent {
     }
 
     const orderDetails = {
-      // userId should be passed ⭐
       products: this.allItems,
       totalPrice: this.grandTotal,
-      // orderId: this.generateOrderId(),
-      // date: new Date().toLocaleString(),
     };
     console.log(orderDetails);
 

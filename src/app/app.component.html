@@ -10,6 +10,8 @@
         ></mat-icon
       ></a>
 
+      @if (isLoggedIn) {
+
       <a routerLink="cart" mat-raised-button
         >Cart
         <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"  fontIcon="cart"></mat-icon> -->
@@ -19,7 +21,7 @@
         >Orders
         <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"  fontIcon="order"></mat-icon> -->
       </a>
-
+      }
       <a routerLink="login" mat-raised-button
         >Login
         <mat-icon
@@ -29,9 +31,7 @@
         ></mat-icon
       ></a>
 
-      <a routerLink="signup" mat-raised-button
-        >Signup
-       </a>
+      <a routerLink="signup" mat-raised-button>Signup </a>
     </div>
 
     <!-- <div class="example-button-row">
