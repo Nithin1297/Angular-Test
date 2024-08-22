@@ -30,15 +30,12 @@
         <ng-container *ngIf="canEditOrDelete(); else noEditDelete">
           <div class="button-container" *ngIf="isLoggedIn">
             <div>
-              <button
-                mat-raised-button
-                color="accent"
+              <button matTooltip="Delete" matTooltipPosition="after"
+                mat-button
                 (click)="deleteProduct()"
-                class="delete-button"
-                style="color: #333"
               >
                 <mat-icon
-                  ><span class="material-symbols-outlined">
+                  ><span >
                     delete</span
                   ></mat-icon
                 >

@@ -14,7 +14,7 @@
   <h4>Orders</h4>
   <div *ngFor="let order of orders" class="each-order">
     <p>Order ID: {{ order.orderId }}</p>
-    <p>Order Date: {{ order.orderDate }}</p>
+    <p>Order Date: {{ order.orderDate | date:'medium'  }}</p>
     <!-- <h3>Items</h3> -->
     <div class="items">
       <div *ngFor="let item of order.products" class="single-item">
@@ -28,7 +28,7 @@
           <!-- <p>Product ID: {{ item.productId }}</p>
           <p>Quantity: {{ item.quantity }}</p> -->
           <!-- You can add more details if necessary -->
-          <p>Price: {{ item.price }}</p>
+          <p>Price: {{ item.price | currency }}</p>
         </div>
       </div>
     </div>
