@@ -1,7 +1,7 @@
 .container{
     display: flex;
-    width: 700px;
-    height: 300px;
+    width: 500px;
+    height: 250px;
     gap: 2rem;
     background: whitesmoke;
 }
@@ -13,7 +13,28 @@
 }
 .whole-page{
     display: flex;
+    flex-wrap: wrap;
     // min-height: 100vh;
     // margin: 3rem 3rem;
     gap: 2rem;
+}
+.msg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12rem;
+}
+.place-order{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+.bdy{
+    display: flex;
+    // flex-wrap: nowrap;
+    justify-content: space-between;
+    // align-items: center;
+    margin-left: 15rem;
+    min-height: 100vh;
 }

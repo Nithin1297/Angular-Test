@@ -55,7 +55,7 @@ export class LoginComponent {
   }
 
   login() {
-    console.log(this.loginForm.value);
+    // console.log(this.loginForm.value);
     this.dataService
       .login(this.loginForm.value)
       .then((data) => {

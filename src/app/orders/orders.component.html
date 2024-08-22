@@ -2,7 +2,9 @@
 
 <div class="order-details">
   @if (orders.length == 0) {
-  <h1>No orders yet</h1>
+  <div class="msg">
+    <h4>No orders yet</h4>
+  </div>
   }@else {
   <h4>Orders</h4>
   <div *ngFor="let order of orders" class="each-order">
@@ -31,5 +33,7 @@
 </div>
 
 } @else {
-<h1>Please Login 😊</h1>
+<div class="msg">
+  <h4>Please <strong>Login</strong> 😊</h4>
+</div>
 }

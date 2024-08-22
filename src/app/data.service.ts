@@ -55,7 +55,7 @@ export class DataService {
       .then((res) => res.json())
       .then((data) => {
         this.cart = data[0].products; // Update the cart directly
-        console.log(this.cart);
+        // console.log(this.cart);
       })
       .catch((error) => {
         // console.error('Error fetching cart:', );

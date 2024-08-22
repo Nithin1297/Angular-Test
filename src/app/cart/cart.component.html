@@ -1,27 +1,35 @@
 @if (isLoggedIn) { @if (allItems.length == 0) {
-<h1>Cart is empty</h1>
+<div class="msg">
+  <h4>Your Cart is empty</h4>
+</div>
 }@else {
 
-<button (click)="placeOrder()" mat-button>
-  <span class="material-symbols-outlined"> Place order</span>
-</button>
-<div class="grand-total">
-  <h3>Grand Total: {{ grandTotal | currency }}</h3>
-</div>
-<div class="whole-page">
-  <div *ngFor="let cartItem of allItems; let i = index" class="container">
-    <img [src]="cartItem.image" alt="{{ cartItem.name }}" />
-    <div class="content">
-      <h3>{{ cartItem.name }}</h3>
-      <p>Quantity: {{ cartItem.quantity }}</p>
-      <p>Price: {{ cartItem.price | currency }}</p>
-      <p>Total: {{ cartItem.quantity * cartItem.price | currency }}</p>
-      <button (click)="removeFromCart(cartItem)" mat-button>
-        <span class="material-symbols-outlined">Remove From Cart</span>
-      </button>
+  <div class="place-order">
+    <button (click)="placeOrder()" mat-raised-button  matTooltip="Place Order" matTooltipPosition="above" >
+      <span class="material-symbols-outlined">local_shipping</span>
+    </button>
+  </div>
+  <div class="grand-total">
+    <h4>Cart Total: {{ grandTotal | currency }}</h4>
+  </div>
+<div class="bdy">
+  <div class="whole-page">
+    <div *ngFor="let cartItem of allItems; let i = index" class="container">
+      <img [src]="cartItem.image" alt="{{ cartItem.name }}" />
+      <div class="content">
+        <h3>{{ cartItem.name }}</h3>
+        <p>Quantity: {{ cartItem.quantity }}</p>
+        <p>Price: {{ cartItem.price | currency }}</p>
+        <p>Total: {{ cartItem.quantity * cartItem.price | currency }}</p>
+        <button (click)="removeFromCart(cartItem)" mat-button>
+          <span >Remove From Cart</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>
 } } @else {
-<h1>Please Login to add items to Cart.. 😊</h1>
+<div class="msg">
+  <h4>Please <strong>Login</strong> to add items to Cart.. 😊</h4>
+</div>
 }

@@ -21,7 +21,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     RouterLink,
     CommonModule,
     MatTooltipModule,
-    MatTooltipModule,
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',

@@ -6,6 +6,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common';
     MatChipsModule,
     MatIconModule,
     CommonModule,
+    MatTooltipModule,
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
