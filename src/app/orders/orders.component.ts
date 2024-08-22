@@ -13,7 +13,15 @@ import { CommonModule } from '@angular/common';
 export class OrdersComponent {
   orders: any[] = []; // Initialize as an empty array
 
-  constructor(private dataService: DataService, private router: Router) {}
+  constructor(private dataService: DataService, private router: Router) {
+    this.isLoggedIn = this.checkToken();
+  }
+  isLoggedIn: boolean;
+
+  checkToken(): boolean {
+    const token = localStorage.getItem('token');
+    return !!token;
+  }
 
   ngOnInit() {
     this.getOrders();

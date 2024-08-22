@@ -32,6 +32,15 @@ export class CartComponent {
   constructor(public dataService: DataService, private router: Router) {
     this.allItems = dataService.cart;
     this.calculateGrandTotal();
+    
+    this.isLoggedIn = this.checkToken();
+  }
+  
+  isLoggedIn: boolean;
+
+  checkToken(): boolean {
+    const token = localStorage.getItem('token');
+    return !!token;
   }
 
   calculateGrandTotal() {

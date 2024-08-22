@@ -1,25 +1,11 @@
+@if (isLoggedIn) {
+
 <button (click)="placeOrder()" mat-button>
   <span class="material-symbols-outlined"> Place order</span>
 </button>
 <div class="grand-total">
   <h3>Grand Total: {{ grandTotal | currency }}</h3>
 </div>
-<!-- <div class="whole-page">
-  @for(cartItem of allItems ; track $index){
-  <div class="container">
-    <img src="{{ cartItem.image }}" alt="" />
-    <div class="content">
-      <h3>{{ cartItem.name }}</h3>
-      <p>Quantity : {{ cartItem.quantity }}</p>
-      <p>price : {{ cartItem.price | currency }}</p>
-      <p>total : {{ cartItem.quantity * +cartItem.price | currency }}</p>
-      <button (click)="removeFromCart(cartItem)" mat-button>
-        <span class="material-symbols-outlined">Remove From Cart</span>
-      </button>
-    </div>
-  </div>
-  }
-</div> -->
 <div class="whole-page">
   <div *ngFor="let cartItem of allItems; let i = index" class="container">
     <img [src]="cartItem.image" alt="{{ cartItem.name }}" />
@@ -34,3 +20,6 @@
     </div>
   </div>
 </div>
+} @else {
+<h1>Please Login to add items to Cart.. 😊</h1>
+}

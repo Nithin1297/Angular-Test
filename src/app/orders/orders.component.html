@@ -1,24 +1,31 @@
+@if (isLoggedIn) {
+
 <div class="order-details">
   <h4>Orders</h4>
   <div *ngFor="let order of orders" class="each-order">
     <p>Order ID: {{ order.orderId }}</p>
     <p>Order Date: {{ order.orderDate }}</p>
-    <h3>Items</h3>
+    <!-- <h3>Items</h3> -->
     <div class="items">
       <div *ngFor="let item of order.products" class="single-item">
-        <!-- <img
-          src="{{ item.productId }}"
-          alt="{{ item.productId }}"
+        <img
+          src="{{ item.image }}"
+          alt="{{ item.name }}"
           width="200px"
           height="200px"
-        /> -->
+        />
         <div>
-          <p>Product ID: {{ item.productId }}</p>
-          <p>Quantity: {{ item.quantity }}</p>
+          <!-- <p>Product ID: {{ item.productId }}</p>
+          <p>Quantity: {{ item.quantity }}</p> -->
           <!-- You can add more details if necessary -->
+          <p>Price: {{ item.price }}</p>
         </div>
       </div>
     </div>
     <p>Grand Total: {{ order.totalPrice | currency }}</p>
   </div>
 </div>
+}
+@else {
+  <h1>Please Login 😊</h1>
+  }

@@ -19,14 +19,5 @@ import { MatMenuModule } from '@angular/material/menu';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'Angular-Test';
-  isLoggedIn!: boolean;
-
-  checkToken(): boolean {
-    const token = localStorage.getItem('token');
-    return !!token;
-  }
-  constructor() {
-    this.isLoggedIn = this.checkToken();
-  }
+  title = 'E-Commerce';
 }
