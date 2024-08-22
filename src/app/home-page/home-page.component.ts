@@ -3,6 +3,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,6 +12,7 @@ import { DataService, Iproduct } from '../data.service';
 import { ProductComponent } from '../product/product.component';
 import { MatIconModule } from '@angular/material/icon';
 import { debounceTime, switchMap, catchError, of, startWith } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-home-page',
@@ -20,7 +22,7 @@ import { debounceTime, switchMap, catchError, of, startWith } from 'rxjs';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    ProductComponent,
+    ProductComponent,FormsModule, MatButtonModule,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -92,4 +94,6 @@ export class HomePageComponent {
   //       this.msg = 'Something went wrong 🥲';
   //     });
   // }
+
+ 
 }

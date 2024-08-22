@@ -1,9 +1,19 @@
 <form class="search"  [formGroup]="searchForm">
   <mat-form-field >
     <input matInput placeholder="Search.." formControlName="search" class="inp" />
-    <mat-icon fontIcon="search"></mat-icon>
+    <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
 </form>
+
+<!-- <mat-form-field class="example-form-field"  [formGroup]="searchForm">
+  <mat-label>Clearable input</mat-label>
+  <input matInput type="text" [(ngModel)]="search" formControlName="search">
+  @if (search) {
+    <button matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  }
+</mat-form-field> -->
 
 <div class="book-list-container">
   <div class="List-of-book">
