@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-cart',
@@ -17,13 +18,14 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatChipsModule,
     MatIconModule,
     CommonModule,
-    MatTooltipModule,
+    MatTooltipModule,MatProgressSpinnerModule
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
   grandTotal: number = 0;
+  isLoading: boolean = true
   removeFromCart(item: Iproduct) {
     this.dataService.removeFromCart(item);
     this.calculateGrandTotal(); // Recalculate grand total after removal
@@ -59,7 +61,7 @@ export class CartComponent {
     this.dataService.isCartEmpty().then(() => {
       this.allItems = this.dataService.cart; // Assign fetched cart items
       this.calculateGrandTotal(); // Recalculate grand total
-    });
+    }).then(() => this.isLoading = false);
     // this.loaditems();
   }
 
@@ -106,8 +108,8 @@ export class CartComponent {
     return true; // Validation passed
   }
 
-  id: number = 1;
-  generateOrderId() {
-    return (this.id += 1);
-  }
+  // id: number = 1;
+  // generateOrderId() {
+  //   return (this.id += 1);
+  // }
 }

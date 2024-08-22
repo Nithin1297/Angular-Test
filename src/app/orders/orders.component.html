@@ -1,4 +1,9 @@
 @if (isLoggedIn) {
+  <div class="load">
+    @if (isLoading) {
+      <mat-spinner></mat-spinner>
+    }
+  </div>
 
 <div class="order-details">
   @if (orders.length == 0) {

@@ -1,4 +1,10 @@
-@if (isLoggedIn) { @if (allItems.length == 0) {
+@if (isLoggedIn) { 
+  <div class="load">
+    @if (isLoading) {
+      <mat-spinner></mat-spinner>
+    }
+  </div>
+  @if (allItems.length == 0) {
 <div class="msg">
   <h4>Your Cart is empty</h4>
 </div>
