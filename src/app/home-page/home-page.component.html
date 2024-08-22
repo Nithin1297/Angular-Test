@@ -1,6 +1,6 @@
 <form class="search"  [formGroup]="searchForm">
-  <mat-form-field class="inp">
-    <input matInput placeholder="Search.." formControlName="search" />
+  <mat-form-field >
+    <input matInput placeholder="Search.." formControlName="search" class="inp" />
     <mat-icon fontIcon="search"></mat-icon>
   </mat-form-field>
 </form>
@@ -13,6 +13,7 @@
     <app-product
       [product]="product"
       [id]="product.productId"
+      (deleteProductEvent)="deleteProductP(product)"
       (addItemEvent)="addOneProduct(product)"
     />
     }

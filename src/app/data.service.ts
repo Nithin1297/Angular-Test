@@ -20,6 +20,8 @@ export interface User {
 export interface TokenResponse {
   msg: string;
   token: string;
+  username: string;
+  roleId: string;
 }
 
 @Injectable({
@@ -32,6 +34,12 @@ export class DataService {
   id!: string;
   cart: Array<Iproduct> = [];
 
+  deleteProduct(product: Iproduct) {
+    return fetch(`${this.API}/products/${product.productId}`, {
+      method: 'Delete',
+    }).then((res) => res.json());
+  }
+
   addProductP(item: Iproduct) {
     if (item.quantity <= 0) {
       console.error(`Cannot add ${item.name} to cart. Out of stock.`);
@@ -40,16 +48,16 @@ export class DataService {
 
     const existingItem = this.cart.find((i) => item.productId === i.productId);
     if (existingItem) {
-      existingItem.qty += 1; 
+      existingItem.qty += 1;
     } else {
-      this.cart.push({ ...item, qty: 1 }); 
+      this.cart.push({ ...item, qty: 1 });
     }
   }
 
   removeFromCart(item: Iproduct) {
     const cartItem = this.cart.find((i) => i.productId === item.productId);
     if (cartItem) {
-      cartItem.qty -= 1; 
+      cartItem.qty -= 1;
       if (cartItem.qty === 0) {
         this.cart = this.cart.filter((i) => i.productId !== item.productId); // Remove item from cart if qty is 0
       }
@@ -90,7 +98,7 @@ export class DataService {
     return this.postOrderToApi(orderDetails);
   }
 
-  userIdOnOrder: string ="9861fc18-6fc5-4fe4-b324-50ea96bd8d29";
+  userIdOnOrder: string = '9861fc18-6fc5-4fe4-b324-50ea96bd8d29';
   async postOrderToApi(orderDetails: any): Promise<any> {
     return await fetch(`${this.API}/orders`, {
       method: 'POST',
@@ -142,7 +150,9 @@ export class DataService {
   }
 
   searchUser(searchTerm: string) {
-    return this.http.get<Iproduct[]>(`${this.API}/products?search=${searchTerm}`);
+    return this.http.get<Iproduct[]>(
+      `${this.API}/products?search=${searchTerm}`
+    );
   }
 
   constructor(private http: HttpClient) {}

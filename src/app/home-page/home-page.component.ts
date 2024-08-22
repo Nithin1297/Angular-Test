@@ -38,6 +38,19 @@ export class HomePageComponent {
       search: '',
     });
   }
+
+  deleteProductP(product: Iproduct) {
+    this.dataService
+      .deleteProduct(product)
+      .then(() => {
+        this.ngOnInit(); // Reload movies after deletion
+      })
+      .catch((error) => {
+        console.error('Error deleting product:', error);
+        this.msg = 'Failed to delete product.';
+      });
+  }
+
   trackById(index: number, product: Iproduct): string {
     return product.productId;
   }

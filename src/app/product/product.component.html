@@ -12,14 +12,45 @@
   />
   <mat-card-content class="content-container">
     <mat-card-footer class="example-card-footer">
-      @if ({isToken}) {
+      
       <button (click)="addToCart()" mat-button>
         <span class="material-symbols-outlined">Add to Cart</span>
       </button>
-      }
+      
       <button routerLink="/overview/{{ product.productId }}" mat-button>
         <span class="material-symbols-outlined"> info</span>
       </button>
+
+      
+      <!-- <button mat-button (click)="deleteProduct()">
+        <mat-icon>delete</mat-icon>
+      </button> -->
+
+      <ng-container *ngIf="canEditOrDelete(); else noEditDelete">
+        <div class="button-container" *ngIf="isLoggedIn">
+          <div>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="deleteProduct()"
+              class="delete-button"
+              style="color: #333"
+            >
+              <mat-icon
+                ><span class="material-symbols-outlined">
+                  delete</span
+                ></mat-icon
+              >
+            </button>
+          </div>
+     
+        </div>
+      </ng-container>
+      <ng-template #noEditDelete>
+        <!-- Optionally, you can add a message or leave it empty -->
+      </ng-template>
+
+
       <p>
         type : <strong>{{ product.type }}</strong>
       </p>
