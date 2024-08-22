@@ -51,6 +51,20 @@ export class DataService {
       existingItem.qty += 1;
     } else {
       this.cart.push({ ...item, qty: 1 });
+      fetch(`${this.API}/cart`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': localStorage.getItem('token') as string,
+        },
+        body: JSON.stringify(this.cart),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
     }
   }
 
@@ -64,23 +78,23 @@ export class DataService {
     }
   }
 
-  async updateProductQuantity(
-    productId: string,
-    quantity: number
-  ): Promise<any> {
-    return await fetch(`${this.API}/products/${productId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ quantity }),
-    }).then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    });
-  }
+  // async updateProductQuantity(
+  //   productId: string,
+  //   quantity: number
+  // ): Promise<any> {
+  //   return await fetch(`${this.API}/products/${productId}`, {
+  //     method: 'PUT',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ quantity }),
+  //   }).then((response) => {
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok');
+  //     }
+  //     return response.json();
+  //   });
+  // }
 
   async getDataP(): Promise<Iproduct[]> {
     return await fetch(`${this.API}/products`).then((res) => res.json());
@@ -116,7 +130,7 @@ export class DataService {
       // .then((data) => (this.userIdOnOrder = data.orders.userId))
       .then((order) => {
         orderDetails.items.forEach((item: Iproduct) => {
-          this.updateProductQuantity(item.productId, item.quantity - item.qty);
+          // this.updateProductQuantity(item.productId, item.quantity - item.qty);
         });
         return order;
       });

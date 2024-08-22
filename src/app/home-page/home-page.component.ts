@@ -80,16 +80,16 @@ export class HomePageComponent {
     // this.loadProducts();
   }
 
-  loadProducts() {
-    this.dataService
-      .getDataP()
-      .then((data) => {
-        this.allProducts = data;
-        this.isLoading = false;
-      })
-      .catch(() => {
-        this.isLoading = false;
-        this.msg = 'Something went wrong 🥲';
-      });
-  }
+  // loadProducts() {
+  //   this.dataService
+  //     .getDataP()
+  //     .then((data) => {
+  //       this.allProducts = data;
+  //       this.isLoading = false;
+  //     })
+  //     .catch(() => {
+  //       this.isLoading = false;
+  //       this.msg = 'Something went wrong 🥲';
+  //     });
+  // }
 }
