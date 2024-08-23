@@ -33,19 +33,7 @@ export class DataService {
   q!: number;
   id!: string;
   cart: Array<Iproduct> = [];
-  // len: number = this.cart.length
-  // async isCartEmpty() {
-  //   return await fetch(`${this.API}/cart`, {
-  //     headers: {
-  //       'x-auth-token': localStorage.getItem('token') as string,
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       this.cart.push(data[0].products), console.log(data[0].products);
-  //     });
-  // }
-
+  
   async isCartEmpty() {
     return await fetch(`${this.API}/cart`, {
       headers: {
@@ -68,7 +56,7 @@ export class DataService {
     }).then((res) => res.json());
   }
 
-  addProductP(item: Iproduct) {
+  async addProductP(item: Iproduct) {
     if (item.quantity <= 0) {
       console.error(`Cannot add ${item.name} to cart. Out of stock.`);
       return;
@@ -79,7 +67,7 @@ export class DataService {
       existingItem.quantity += 1;
     } else {
       this.cart.push({ ...item, quantity: 1 });
-      fetch(`${this.API}/cart`, {
+      await fetch(`${this.API}/cart`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -96,13 +84,27 @@ export class DataService {
     }
   }
 
-  removeFromCart(item: Iproduct) {
+  async removeFromCart(item: Iproduct) {
     const cartItem = this.cart.find((i) => i.productId === item.productId);
     if (cartItem) {
       cartItem.quantity -= 1;
       if (cartItem.quantity === 0) {
-        this.cart = this.cart.filter((i) => i.productId !== item.productId); // Remove item from cart if quantityis 0
+        this.cart = this.cart.filter((i) => i.productId !== item.productId); // Remove item from cart if quantity is 0
       }
+      await fetch(`${this.API}/cart`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': localStorage.getItem('token') as string,
+        },
+        body: JSON.stringify(this.cart),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
     }
   }
 
