@@ -33,6 +33,7 @@ export class DataService {
   q!: number;
   id!: string;
   cart: Array<Iproduct> = [];
+  loginSuccessful:boolean=false;
   
   async isCartEmpty() {
     return await fetch(`${this.API}/cart`, {

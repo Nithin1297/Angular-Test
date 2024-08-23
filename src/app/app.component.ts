@@ -5,6 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
@@ -20,11 +22,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  logout() {
-    this.openSnackBar('Logged out Successfully ', 'ok');
-    return localStorage.clear();
-  }
   title = 'E-Commerce';
+
+  constructor(private router: Router, public dataService: DataService) {
+  }
+  
+  logout() {
+    this.dataService.loginSuccessful = false;
+    this.openSnackBar('Logged out Successfully ', 'ok');
+
+    localStorage.clear();
+
+    return this.router.navigate(['']);
+  }
 
   private _snackBar = inject(MatSnackBar);
 

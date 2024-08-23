@@ -20,12 +20,11 @@
       </a>
 
       <a routerLink="orders" mat-raised-button
-        ><span class="material-symbols-outlined">
-          receipt_long
-          </span> Orders
+        ><span class="material-symbols-outlined"> receipt_long </span> Orders
         <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"  fontIcon="order"></mat-icon> -->
       </a>
 
+      @if (!dataService.loginSuccessful) {
       <a routerLink="login" mat-raised-button
         >Login
         <mat-icon
@@ -34,7 +33,7 @@
           fontIcon="login"
         ></mat-icon
       ></a>
-
+      }@else {
       <a routerLink="" mat-raised-button (click)="logout()"
         >Logout
         <mat-icon
@@ -43,6 +42,7 @@
           fontIcon="logout"
         ></mat-icon
       ></a>
+      }
     </div>
   </nav>
 </header>
