@@ -64,11 +64,9 @@ export class LoginComponent {
         localStorage.setItem('username', data.username);
         localStorage.setItem('roleId', data.roleId);
         this.dataService.loginSuccessful = true;
+        this.openSnackBar(`Hello ${this.loginForm.value.username} 👋`, 'Hi..')
         }
       })
-      .then((data) =>
-        this.openSnackBar(`Hello ${this.loginForm.value.username} 👋`, 'Hi..')
-      )
       .then(() => this.router.navigate(['/']));
   }
 }
