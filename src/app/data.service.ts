@@ -33,8 +33,9 @@ export class DataService {
   q!: number;
   id!: string;
   cart: Array<Iproduct> = [];
-  loginSuccessful:boolean=false;
-  
+  loginSuccessful: boolean = false;
+  isToken!: boolean;
+
   async isCartEmpty() {
     return await fetch(`${this.API}/cart`, {
       headers: {
@@ -75,13 +76,12 @@ export class DataService {
           'x-auth-token': localStorage.getItem('token') as string,
         },
         body: JSON.stringify(this.cart),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      });
     }
   }
 
@@ -99,13 +99,12 @@ export class DataService {
           'x-auth-token': localStorage.getItem('token') as string,
         },
         body: JSON.stringify(this.cart),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      });
     }
   }
 

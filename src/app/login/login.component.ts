@@ -59,10 +59,12 @@ export class LoginComponent {
     this.dataService
       .login(this.loginForm.value)
       .then((data) => {
+        if(data.token != undefined){
         localStorage.setItem('token', data.token);
         localStorage.setItem('username', data.username);
         localStorage.setItem('roleId', data.roleId);
         this.dataService.loginSuccessful = true;
+        }
       })
       .then((data) =>
         this.openSnackBar(`Hello ${this.loginForm.value.username} 👋`, 'Hi..')

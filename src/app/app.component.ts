@@ -23,16 +23,30 @@ import { DataService } from './data.service';
 })
 export class AppComponent {
   title = 'E-Commerce';
-
   constructor(private router: Router, public dataService: DataService) {
+    this.checkToken();
   }
-  
+  ngOnInit() {
+    this.checkToken();
+  }
+  checkToken() {
+    localStorage.getItem('token') != undefined ||
+    localStorage.getItem('token') != null
+      ? (this.dataService.isToken = true)
+      : (this.dataService.isToken = false);
+    console.log(this.dataService.isToken);
+  }
+
   logout() {
     this.dataService.loginSuccessful = false;
     this.openSnackBar('Logged out Successfully ', 'ok');
 
     localStorage.clear();
-
+    localStorage.getItem('token') != undefined ||
+    localStorage.getItem('token') != null
+      ? (this.dataService.isToken = true)
+      : (this.dataService.isToken = false);
+    console.log(this.dataService.isToken);
     return this.router.navigate(['']);
   }
 

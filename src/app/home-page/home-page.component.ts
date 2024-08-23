@@ -13,7 +13,7 @@ import { ProductComponent } from '../product/product.component';
 import { MatIconModule } from '@angular/material/icon';
 import { debounceTime, switchMap, catchError, of, startWith } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-home-page',
@@ -23,7 +23,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    ProductComponent,FormsModule, MatButtonModule,MatProgressSpinnerModule
+    ProductComponent,
+    FormsModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -79,6 +82,11 @@ export class HomePageComponent {
         this.allProducts = data;
         this.isLoading = false;
       });
+    localStorage.getItem('token') != undefined ||
+    localStorage.getItem('token') != null
+      ? (this.dataService.isToken = true)
+      : (this.dataService.isToken = false);
+    console.log(this.dataService.isToken);
 
     // this.loadProducts();
   }
@@ -95,8 +103,4 @@ export class HomePageComponent {
   //       this.msg = 'Something went wrong 🥲';
   //     });
   // }
-
- 
 }
-
-

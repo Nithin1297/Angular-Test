@@ -24,7 +24,7 @@
         <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"  fontIcon="order"></mat-icon> -->
       </a>
 
-      @if (!dataService.loginSuccessful) {
+      @if (!dataService.isToken) {
       <a routerLink="login" mat-raised-button
         >Login
         <mat-icon
