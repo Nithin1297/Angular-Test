@@ -28,7 +28,7 @@ import { CurrencyPipe } from '@angular/common';
     FormsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    CurrencyPipe
+    CurrencyPipe,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -51,7 +51,7 @@ export class HomePageComponent {
     this.dataService
       .deleteProduct(product)
       .then(() => {
-        this.ngOnInit(); // Reload movies after deletion
+        this.ngOnInit();
       })
       .catch((error) => {
         console.error('Error deleting product:', error);
@@ -88,21 +88,5 @@ export class HomePageComponent {
     localStorage.getItem('token') != null
       ? (this.dataService.isToken = true)
       : (this.dataService.isToken = false);
-    // console.log(this.dataService.isToken);
-
-    // this.loadProducts();
   }
-
-  // loadProducts() {
-  //   this.dataService
-  //     .getDataP()
-  //     .then((data) => {
-  //       this.allProducts = data;
-  //       this.isLoading = false;
-  //     })
-  //     .catch(() => {
-  //       this.isLoading = false;
-  //       this.msg = 'Something went wrong 🥲';
-  //     });
-  // }
 }

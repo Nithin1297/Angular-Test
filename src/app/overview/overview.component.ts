@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { CurrencyPipe } from '@angular/common';
-
+ 
 @Component({
   selector: 'app-overview',
   standalone: true,
@@ -25,7 +25,7 @@ export class OverviewComponent {
     private route: ActivatedRoute
   ) {}
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id') || '';
+    let id = this.route.snapshot.paramMap.get('id') ?? '';
 
     this.dataService
       .getProductByIdP(id)

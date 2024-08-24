@@ -7,7 +7,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { DataService, Iproduct } from '../data.service';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 // import { Router } from 'express';
 
 @Component({
@@ -21,7 +21,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     RouterLink,
     CommonModule,
     MatTooltipModule,
-    CurrencyPipe
+    CurrencyPipe,
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',
@@ -48,7 +48,7 @@ export class ProductComponent {
   addToCart() {
     this.addItemEvent.emit(this.product);
     this.isLoggedIn
-      ? this.openSnackBar('Item added to cart🥳', 'ok')
+      ? this.openSnackBar('Item added to cart 🥳', 'Yay')
       : this.openSnackBar('Please Login 🙂', 'ok');
   }
 

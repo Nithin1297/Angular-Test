@@ -2,13 +2,13 @@
   <mat-card class="example-card" appearance="outlined">
 
     <div class="title">
-      <mat-card-title >{{ product.name }}</mat-card-title>
+      <mat-card-title >{{ product?.name }}</mat-card-title>
     </div>
     <mat-card-header>
       <img
         mat-card-image
-        src="{{ product.image }}"
-        alt="Photo of Author"
+        src="{{ product?.image }}"
+        alt="{{product?.name}}"
         width="100%"
         height="300px"
       />
@@ -19,13 +19,13 @@
       <mat-card-content class="content-container">
         <mat-card-footer class="example-card-footer">
           <p>
-            <strong>{{ product.type }}</strong>
+            <strong>{{ product?.type }}</strong>
           </p>
           <p>
-            <strong>{{ product.price |  currency: 'INR'  }}</strong>
+            <strong>{{ product?.price |  currency: 'INR'  }}</strong>
           </p>
           <p>
-            {{ product.description }}
+            {{ product?.description }}
           </p>
         </mat-card-footer>
       </mat-card-content>
