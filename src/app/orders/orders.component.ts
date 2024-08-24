@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 import { CommonModule } from '@angular/common';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-orders',
   standalone: true,
-  imports: [CommonModule,MatProgressSpinnerModule],
+  imports: [CommonModule, MatProgressSpinnerModule],
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.scss'], // Corrected to 'styleUrls'
+  styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent {
-  orders: any[] = []; // Initialize as an empty array
-  isLoading: boolean = true
+  orders: any[] = [];
+  isLoading: boolean = true;
 
   constructor(private dataService: DataService, private router: Router) {
     this.isLoggedIn = this.checkToken();
@@ -33,12 +33,20 @@ export class OrdersComponent {
     this.dataService
       .getOrdersP()
       .then((data) => {
-        this.orders = data; // Assign the entire response to orders
-        // console.log(this.orders); // Debugging to ensure data is fetched correctly
+        this.orders = data;
+        this.sortOrdersByRecentDate();
       })
-      .then(() => this.isLoading = false)
+      .then(() => (this.isLoading = false))
       .catch((error) => {
         console.error('Error fetching orders:', error);
       });
+  }
+
+  sortOrdersByRecentDate(): void {
+    this.orders.sort((a, b) => {
+      const dateA = new Date(a.orderDate);
+      const dateB = new Date(b.orderDate);
+      return dateB.getTime() - dateA.getTime();
+    });
   }
 }
