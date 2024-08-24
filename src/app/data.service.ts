@@ -28,8 +28,8 @@ export interface TokenResponse {
   providedIn: 'root',
 })
 export class DataService {
-  // API: string = 'https://node-test-la0a.onrender.com';
-  API: string = `http://localhost:4000`;
+  API: string = 'https://node-test-la0a.onrender.com';
+  // API: string = `http://localhost:4000`;
   q!: number;
   id!: string;
   cart: Array<Iproduct> = [];
