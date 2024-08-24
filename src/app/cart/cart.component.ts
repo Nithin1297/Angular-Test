@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -18,7 +19,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatChipsModule,
     MatIconModule,
     CommonModule,
-    MatTooltipModule,MatProgressSpinnerModule
+    MatTooltipModule,MatProgressSpinnerModule,
+    RouterLink
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',

@@ -1,31 +1,12 @@
 .example-card {
     width: 350px;
     height: 450px;
-  }
-  
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-    object-fit: cover;
-  }
-  
-  .content-container{
-    display: flex;
-    // justify-content: center;
-  }
-  .buttons{
-    
+  }  
+  .buttons{    
     display: flex;
     justify-content: space-evenly;
   }
-  .material-symbols-outlined {
-    font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24
-  }
   .btns{
     display: flex;
-    justify-content: end;
+    justify-content: space-evenly;
   }
