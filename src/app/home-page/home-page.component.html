@@ -1,26 +1,28 @@
-<form class="search"  [formGroup]="searchForm">
-  <mat-form-field >
-    <input matInput placeholder="Search.." formControlName="search" class="inp" />
-    <mat-icon matSuffix>search</mat-icon>
-  </mat-form-field>
-</form>
-<div class="load">
-  @if (isLoading) {
-    <mat-spinner></mat-spinner>
-  }
-</div>
-
-<div class="book-list-container">
-   
-  <div class="List-of-book">
-   @for (product of allProducts; track product.productId) {
-    <app-product
-      [product]="product"
-      [id]="product.productId"
-      (deleteProductEvent)="deleteProductP(product)"
-      (addItemEvent)="addOneProduct(product)"
-    />
+<div class="whole">
+  <form class="search"  [formGroup]="searchForm">
+    <mat-form-field >
+      <input matInput placeholder="Search.." formControlName="search" class="inp" />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </form>
+  <div class="load">
+    @if (isLoading) {
+      <mat-spinner></mat-spinner>
     }
   </div>
+  
+  <div class="book-list-container">
+  
+    <div class="List-of-book">
+     @for (product of allProducts; track product.productId) {
+      <app-product
+        [product]="product"
+        [id]="product.productId"
+        (deleteProductEvent)="deleteProductP(product)"
+        (addItemEvent)="addOneProduct(product)"
+      />
+      }
+    </div>
+  </div>
+  <h1>{{ msg }}</h1>
 </div>
-<h1>{{ msg }}</h1>

@@ -2,48 +2,57 @@
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
 />
-<header>
-  <nav>
-    <div class="example-button-row">
-      <a routerLink="" mat-raised-button
-        >Home
-        <mat-icon
-          aria-hidden="false"
-          aria-label="Example home icon"
-          fontIcon="home"
-        ></mat-icon
-      ></a>
+<div class="whole">
+  <header>
+    <nav>
+      <img
+      class="imm"
+        src="https://w7.pngwing.com/pngs/713/936/png-transparent-online-shopping-shopping-cart-logo-e-commerce-market-blue-angle-company.png"
+        alt=""
+        width="100px"
+        height="90px"
+      />
+      <div class="example-button-row">
+        <a routerLink="" mat-raised-button
+          >Home
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="home"
+          ></mat-icon
+        ></a>
 
-      <a routerLink="cart" mat-raised-button
-        ><span class="material-symbols-outlined"> shopping_cart </span> Cart
-        <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"  fontIcon="cart"></mat-icon> -->
-      </a>
+        <a routerLink="cart" mat-raised-button
+          ><span class="material-symbols-outlined"> shopping_cart </span> Cart
+          <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"  fontIcon="cart"></mat-icon> -->
+        </a>
 
-      <a routerLink="orders" mat-raised-button
-        ><span class="material-symbols-outlined"> receipt_long </span> Orders
-        <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"  fontIcon="order"></mat-icon> -->
-      </a>
+        <a routerLink="orders" mat-raised-button
+          ><span class="material-symbols-outlined"> receipt_long </span> Orders
+          <!-- <mat-icon aria-hidden="false" aria-label="Example home icon"  fontIcon="order"></mat-icon> -->
+        </a>
 
-      @if (!dataService.isToken) {
-      <a routerLink="login" mat-raised-button
-        >Login
-        <mat-icon
-          aria-hidden="false"
-          aria-label="Example home icon"
-          fontIcon="login"
-        ></mat-icon
-      ></a>
-      }@else {
-      <a routerLink="" mat-raised-button (click)="logout()"
-        >Logout
-        <mat-icon
-          aria-hidden="false"
-          aria-label="Example home icon"
-          fontIcon="logout"
-        ></mat-icon
-      ></a>
-      }
-    </div>
-  </nav>
-</header>
+        @if (!dataService.isToken) {
+        <a routerLink="login" mat-raised-button
+          >Login
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="login"
+          ></mat-icon
+        ></a>
+        }@else {
+        <a routerLink="" mat-raised-button (click)="logout()"
+          >Logout
+          <mat-icon
+            aria-hidden="false"
+            aria-label="Example home icon"
+            fontIcon="logout"
+          ></mat-icon
+        ></a>
+        }
+      </div>
+    </nav>
+  </header>
+</div>
 <router-outlet />

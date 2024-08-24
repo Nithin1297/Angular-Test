@@ -4,9 +4,12 @@ body{
 
 header > nav {
 display: flex;
-justify-content: center;
+justify-content: space-between;
 gap: 2rem;
 }
+// .imm{
+//     padding-right: 40rem;
+// }
 header{
     padding: 2rem;
 }
@@ -21,3 +24,6 @@ header{
   'GRAD' 0,
   'opsz' 24
 }
+// .whole{
+//     background-color: #FCF8F3;
+// }
