@@ -8,10 +8,18 @@
     gap: 1rem;
 }
 .each-order{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height :500px;
+    // display: flex;
+    // flex-direction: column;
+    // width: 100%;
+    // height :500px;
+    display: inline-block;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  max-width: 90%;
 }
 .msg{
     display: flex;
@@ -21,4 +29,13 @@
 }
 .load{
     display: flex;justify-content: center;
+  }
+  .order-details{
+    display: flex;
+    flex-direction: column-reverse  ;
+  }
+  .ord{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }

@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-overview',
@@ -12,9 +13,9 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [MatCardModule,
     MatButtonModule,
     MatChipsModule,
-    MatIconModule,],
+    MatIconModule,CurrencyPipe],
   templateUrl: './overview.component.html',
-  styleUrl: './overview.component.scss'
+  styleUrl: './overview.component.scss',
 })
 export class OverviewComponent {
   product!: Iproduct;

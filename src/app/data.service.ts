@@ -28,8 +28,8 @@ export interface TokenResponse {
   providedIn: 'root',
 })
 export class DataService {
-  API: string = 'https://node-test-la0a.onrender.com';
-  // API: string = `http://localhost:4000`;
+  // API: string = 'https://node-test-la0a.onrender.com';
+  API: string = `http://localhost:4000`;
   q!: number;
   id!: string;
   cart: Array<Iproduct> = [];
@@ -37,19 +37,23 @@ export class DataService {
   isToken!: boolean;
 
   async isCartEmpty() {
-    return await fetch(`${this.API}/cart`, {
-      headers: {
-        'x-auth-token': localStorage.getItem('token') as string,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        this.cart = data[0].products; // Update the cart directly
-        // console.log(this.cart);
+    if (localStorage.getItem('token')) {
+      return await fetch(`${this.API}/cart`, {
+        headers: {
+          'x-auth-token': localStorage.getItem('token') as string,
+        },
       })
-      .catch((error) => {
-        // console.error('Error fetching cart:', );
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          this.cart = data[0].products; // Update the cart directly
+          // console.log(this.cart);
+        })
+        .catch((error) => {
+          // console.error('Error fetching cart:', );
+        });
+    } else {
+      return;
+    }
   }
 
   async deleteProduct(product: Iproduct) {
@@ -143,11 +147,15 @@ export class DataService {
   // userIdOnOrder: string = '9861fc18-6fc5-4fe4-b324-50ea96bd8d29';
   async getOrdersP(): Promise<any> {
     // this userId is coming as response to the cart comp
-    return await fetch(`${this.API}/orders/`, {
-      headers: {
-        'x-auth-token': localStorage.getItem('token') as string,
-      },
-    }).then((res) => res.json());
+    if (localStorage.getItem('token')) {
+      return await fetch(`${this.API}/orders/`, {
+        headers: {
+          'x-auth-token': localStorage.getItem('token') as string,
+        },
+      }).then((res) => res.json());
+    } else {
+      return;
+    }
   }
 
   async login(credentials: User): Promise<TokenResponse> {

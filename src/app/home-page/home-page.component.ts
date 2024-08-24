@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { debounceTime, switchMap, catchError, of, startWith } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home-page',
@@ -27,6 +28,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    CurrencyPipe
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -77,7 +79,7 @@ export class HomePageComponent {
         )
       )
       .subscribe((data) => {
-        console.log(data);
+        // console.log(data);
         this.isLoading = false;
         this.allProducts = data;
         this.isLoading = false;
@@ -86,7 +88,7 @@ export class HomePageComponent {
     localStorage.getItem('token') != null
       ? (this.dataService.isToken = true)
       : (this.dataService.isToken = false);
-    console.log(this.dataService.isToken);
+    // console.log(this.dataService.isToken);
 
     // this.loadProducts();
   }

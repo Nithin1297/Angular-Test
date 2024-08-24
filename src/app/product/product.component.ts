@@ -5,7 +5,7 @@ import { RouterLink, Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { DataService, Iproduct } from '../data.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 // import { Router } from 'express';
@@ -21,6 +21,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     RouterLink,
     CommonModule,
     MatTooltipModule,
+    CurrencyPipe
   ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss',

@@ -34,7 +34,7 @@ export class AppComponent {
     localStorage.getItem('token') != null
       ? (this.dataService.isToken = true)
       : (this.dataService.isToken = false);
-    console.log(this.dataService.isToken);
+    // console.log(this.dataService.isToken);
   }
 
   logout() {
@@ -46,7 +46,7 @@ export class AppComponent {
     localStorage.getItem('token') != null
       ? (this.dataService.isToken = true)
       : (this.dataService.isToken = false);
-    console.log(this.dataService.isToken);
+    // console.log(this.dataService.isToken);
     return this.router.navigate(['']);
   }
 
