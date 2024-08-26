@@ -53,10 +53,16 @@
         }
       </div>
       <!-- @if (dataService.isToken){ -->
+      @if (dataService.isToken) {
       <div class="name">
-        <h6>Hello! {{name}}</h6>
+        <h6>welcome {{ dataService.isName }}</h6>
       </div>
-    <!-- } -->
+      }@else {
+      <div class="name">
+        <h6>Login for Better Experience.</h6>
+      </div>
+      }
+      <!-- } -->
     </nav>
   </header>
 </div>

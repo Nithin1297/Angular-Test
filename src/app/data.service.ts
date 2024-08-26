@@ -35,6 +35,7 @@ export class DataService {
   cart: Array<Iproduct> = [];
   loginSuccessful: boolean = false;
   isToken!: boolean;
+  isName:string = localStorage.getItem('username') ?? ''
 
   async isCartEmpty() {
     if (localStorage.getItem('token')) {

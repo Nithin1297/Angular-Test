@@ -36,7 +36,7 @@ export class AppComponent {
       localStorage.getItem('token') != null
     ) {
       this.dataService.isToken = true;
-      this.name = localStorage.getItem('username');
+      // this.dataService.isName = localStorage.getItem('username') ?? '';
     } else {
       this.dataService.isToken = false;
     }
