@@ -6,7 +6,7 @@
   <header>
     <nav>
       <img
-      class="imm"
+        class="imm"
         src="https://w7.pngwing.com/pngs/79/327/png-transparent-shopping-cart-online-shopping-e-commerce-computer-icons-shopping-cart-blue-angle-text.png"
         alt=""
         width="100px"
@@ -52,6 +52,11 @@
         ></a>
         }
       </div>
+      @if (dataService.isToken){
+      <div class="name">
+        <h6>Hello! {{name}}</h6>
+      </div>
+    }
     </nav>
   </header>
 </div>

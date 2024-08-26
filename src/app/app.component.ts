@@ -23,6 +23,7 @@ import { DataService } from './data.service';
 })
 export class AppComponent {
   title = 'E-Commerce';
+  name!: any;
   constructor(private router: Router, public dataService: DataService) {
     this.checkToken();
   }
@@ -30,10 +31,15 @@ export class AppComponent {
     this.checkToken();
   }
   checkToken() {
-    localStorage.getItem('token') != undefined ||
-    localStorage.getItem('token') != null
-      ? (this.dataService.isToken = true)
-      : (this.dataService.isToken = false);
+    if (
+      localStorage.getItem('token') != undefined ||
+      localStorage.getItem('token') != null
+    ) {
+      this.dataService.isToken = true;
+      this.name = localStorage.getItem('username');
+    } else {
+      this.dataService.isToken = false;
+    }
     // console.log(this.dataService.isToken);
   }
 
